@@ -1,0 +1,49 @@
+{
+    "token": "token",
+    "prefix": ".",
+    "bot_owner": "310772257695989761",
+    "embed": {
+        "system": "Tropic System",
+        "title": "Tropic Team Services",
+        "color": "#2F3136",
+        "footer": "Tropic Team Services",
+        "thumbnail": "https://imgur.com/8utR5ug.png"
+    },
+    "emojis": {
+        "loading": "<a:loading:839159302270877806>",
+        "shutdown": "<:shutdown:839222722663415818>",
+        "success": "<a:success:839221736733278319>",
+        "error": "<a:error:839222021430837268>",
+        "boost": "<a:boost:839222358442508329>",
+        "thumbsup": "<a:thumbs_up:840340182246883398>",
+        "thumbsdown": "<a:thumbs_down:840340240426336316>"
+    },
+    "channels": {
+        "welcomeMessages": [],
+        "leaveMessages": [],
+        "suggestions": "836318724180934746",
+        "acceptedSuggestions": "838183748989878292",
+        "deniedSuggestions": "838183768845975572",
+        "bugreports": "838183922671026177",
+        "acceptedBugreports": "838183937255145482",
+        "deniedBugreports": "838183947237457940",
+        "staffmovement": [],
+        "announcements": "836316196482580490",
+        "changelog": "836316408686182420"
+    },
+    "polls": {
+        "event": "836316911934373929",
+        "polls": "836316911934373929"
+    },
+    "welcome": {
+        "addRoles": []
+    },
+    "logging": {
+        "channel": "838184295561429045"
+    },
+    "colors": {
+        "negative": "#2F3136",
+        "positive": "#2F3136"
+    },
+    "mutedRole": "838184976461463641"
+}

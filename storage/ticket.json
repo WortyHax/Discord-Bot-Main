@@ -1,0 +1,63 @@
+{
+	"channel": "836318617841696808",
+	"message": "838192046501396490",
+	"supportAdmin": "837608268377227284",
+	"tiers": [
+		{
+			"category": [],
+			"role": []
+		},
+		{
+			"category": [],
+			"role": []
+		},
+		{
+			"category": [],
+			"role": []
+		}
+	],
+	"types": [
+		{
+			"name": "General Support",
+			"channelPrefix": "general-",
+			"description": "Ask general questions or any support you need.",
+			"emoji": "❓"
+		},
+		{
+			"name": "Buycraft Support",
+			"channelPrefix": "buycraft-",
+			"description": "Any problems or issues regarding the store and different packages",
+			"emoji": "🛒"
+		},
+		{
+			"name": "Prison Support",
+			"channelPrefix": "prison-",
+			"description": "General Prison questions or Support regarding this gamemode",
+			"emoji": "⛏️"
+		},
+		{
+			"name": "Skyblock Support",
+			"channelPrefix": "skyblock-",
+			"description": "General questions or support regarding this gamemode.",
+			"emoji": "🏝️"
+		},
+		{
+			"name": "Factions Spport",
+			"channelPrefix": "factions-",
+			"description": "General questions or support regarding this gamemode.",
+			"emoji": "⛓️"
+		},
+		{
+			"name": "Staff Report",
+			"channelPrefix": "staff-report-",
+			"description": "Report a Staff Member that abused his powers against you.",
+			"emoji": "👮‍♂️"
+		},
+		{
+			"name": "Other",
+			"channelPrefix": "other-",
+			"description": "For any other problems or issues you have that don’t fall under categories from above",
+			"emoji": "🚧"
+		}
+	]
+}
