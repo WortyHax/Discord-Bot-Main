@@ -1,6 +1,6 @@
 {
     "utility": {
-        "token": "ODM4MTg2MTIwNzMwMzc4Mjgw.YI3bpw.wka2ezhn--6PUZgNqhUN0o8X2j0",
+        "token": "Bot Token",
         "botOwner": "310772257695989761",
         "prefix": "."
     },
@@ -12,7 +12,10 @@
     "embed": {
         "systemTitle": "Tropic System",
         "title": "Tropic Team",
-        "author": "Tropic Team"
+        "title_url": "https://mc-market.org/",
+        "author": "Tropic Team",
+        "author_url": "https://mc-market.org/",
+        "color": "#2F3136"
     },
     "suggestion": {
         "colors": {

@@ -15,7 +15,7 @@ module.exports.run = (Client) => {
 		];
 
 		let i = 0;
-		setInterval(() => Client.user.setActivity(`${config.prefix}help | ${activities[i++ % activities.length]}`, { type: 'LISTENING' }), 15000);
+		setInterval(() => Client.user.setActivity(`${config.utility.prefix}help | ${activities[i++ % activities.length]}`, { type: 'LISTENING' }), 15000);
 
 		if (tickets.message && tickets.channel) {
         	Client.channels.fetch(tickets.channel).then(ch => {
