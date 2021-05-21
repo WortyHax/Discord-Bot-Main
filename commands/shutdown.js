@@ -19,7 +19,7 @@ module.exports.run = (Client, message) => {
         .setFooter(config.embed.footer)
         .setTimestamp()
 
-    if (message.author.id !== config.bot_owner) return message.channel.send(error);
+    if (message.author.id !== config.utility.botOwner) return message.channel.send(error);
         message.channel.send(embed).then(m => { 
             Client.destroy();
 })};

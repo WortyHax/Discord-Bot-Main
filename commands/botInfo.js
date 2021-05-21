@@ -3,6 +3,7 @@ const { version } = require('../package.json');
 const { utc } = require('moment');
 const os = require('os');
 const ms = require('ms');
+const moment = require("moment");
 const config = require("../storage/config.json");
 
 module.exports.run = (Client, msg, args) => {
@@ -61,6 +62,7 @@ module.exports.run = (Client, msg, args) => {
             ➥ Commands: \`${Client.commands.size}\`
             ➥ Member Count: \`${Client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}\`
             ➥ Channels: \`${Client.channels.cache.size.toLocaleString()}\`
+            ➥ Server Creation Date: \`${moment(msg.guild.createdTimestamp).format('LT')} ${moment(msg.guild.createdTimestamp).format('LL')} ${moment(msg.guild.createdTimestamp).fromNow()}\`
             ➥ Creation Date: \`${utc(Client.user.createdTimestamp).format('Do MMMM YYYY HH:mm:ss')}\`
             ➥ NodeJS Version: \`${process.version}\`
             ➥ Version: \`v${version}\`\n
@@ -86,7 +88,7 @@ module.exports.run = (Client, msg, args) => {
 };
 
 module.exports.help = {
-    name: "botinfo",
+    name: "botInfo",
     description: "Get some bot information.",
     permissions: [],
     alias: [
