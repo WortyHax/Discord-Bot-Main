@@ -4,10 +4,10 @@ require('dotenv').config();
 const discord = require('discord.js');
 const fs = require('fs');
 const config = require(process.cwd() + '/storage/config.json');
-const emojis = require(process.cwd() + '/storage/emojis.json')
+const emojis = require(process.cwd() + '/storage/emojis.json');
+const lang = require(process.cwd() + '/storage/lang.json');
 const cron = require("cron").CronJob;
 const pagination = require('discord.js-pagination');
-const pollEmbed = require('discord.js-poll-embed');
 const {Op} = require("sequelize")
 
 const logger = require('./logger');
@@ -47,7 +47,7 @@ fs.readdir("./events", {}, (err, files) => {
     });
 });
 
-Client.login(config.utility.token)
+Client.login(config.settings.token)
 giveaways.init(Client);
 reactionrole.init(Client);
 

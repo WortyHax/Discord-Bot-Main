@@ -36,7 +36,7 @@ module.exports.run = async (bot, message, args) => {
         .setFooter(config.embed.footer)
         .setTimestamp()
 
-    if(message.author.id != config.utility.botOwner) return message.channel.send(bot_owner)
+    if(message.author.id != config.settings.botOwner) return message.channel.send(bot_owner)
 
     if(!args[0]) return message.channel.send(command)
 

@@ -1,0 +1,36 @@
+{
+    "suggestion": {
+        "settings": {
+            "command_name": "suggest",
+            "command_description": "Create a suggestion.",
+            "command_usage": "suggest <topic> <suggestion>",
+            "command_aliases": {
+                "alias_1": "suggestion",
+                "alias_2": [],
+                "alias_3": [],
+                "alias_4": [],
+                "alias_5": []
+            }
+        },
+        "pending": {
+            "pending_author": "Suggestion from",
+            "pending_topic": "Topic:",
+            "pending_suggestion": "Suggestion:",
+            "pending_footer": "Suggestion ID:",
+            "success": {
+                "success_author": "'s suggestion was posted!",
+                "success_description_1": "Your suggestion was successfully posted in",
+                "success_description_2": ".",
+                "success_footer": "Suggestion Created!"
+            },
+            "error": {
+                "error_title": "Suggestion Creation",
+                "error_description_1": "Please put a valid topic!",
+                "error_description_2": "**Example:**",
+                "error_description_3": "suggest Discord Add more voice channels",
+                "error_description_4": "**Topics:**",
+                "error_footer": "- to create a suggestion."
+            }
+        }
+    }
+}

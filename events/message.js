@@ -6,11 +6,11 @@ function runCommand(command, Client, msg, args) {}
 
 module.exports.run = (Client, msg) => {
     if (msg.author.bot) return;
-    if (!msg.content.startsWith(config.utility.prefix)) return;
+    if (!msg.content.startsWith(config.settings.prefix)) return;
 
     const messageArray = msg.content.split(/ /g);
     const args = messageArray.slice(1);
-    const cmd = messageArray[0].slice(config.utility.prefix.length);
+    const cmd = messageArray[0].slice(config.settings.prefix.length);
 
     const cmdFile = Client.commands.get(cmd) || Client.commands.get(Client.aliases.get(cmd));
     if (!cmdFile) return;

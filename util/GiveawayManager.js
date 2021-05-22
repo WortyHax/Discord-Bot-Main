@@ -7,8 +7,8 @@ module.exports.init = (Client) => {
         storage: process.cwd() + '/storage/giveaways.json',
         default: {
             botsCanWin: false,
-            embedColor: config.embed.color,
-            embedColorEnd: config.colors.positive,
+            embedColor: config.embed.colors.color,
+            embedColorEnd: config.embed.colors.color,
             reaction: "🎉"
         }
     });

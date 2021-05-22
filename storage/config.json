@@ -1,13 +1,22 @@
 {
-    "utility": {
-        "token": "Bot Token",
+    "settings": {
+        "token": "ODM4MTg2MTIwNzMwMzc4Mjgw.YI3bpw.2ni8j1cgJzv7RqjLJp0km2vLGmc",
         "botOwner": "310772257695989761",
         "prefix": "."
     },
     "channels": {
+        "welcomeMessages": "",
+        "leaveMessages": "",
+        "announcements": "",
+        "updates": "",
+        "staffMovement": "",
+        "polls": "836316911934373929",
         "pendingSuggestions": "836318724180934746",
         "acceptedSuggestions": "838183748989878292",
-        "deniedSuggestions": "838183768845975572"
+        "deniedSuggestions": "838183768845975572",
+        "pendingBugreports": "838183922671026177",
+        "acceptedBugreports": "838183937255145482",
+        "deniedBugReports": "838183947237457940"
     },
     "embed": {
         "systemTitle": "Tropic System",
@@ -15,7 +24,29 @@
         "title_url": "https://mc-market.org/",
         "author": "Tropic Team",
         "author_url": "https://mc-market.org/",
-        "color": "#2F3136"
+        "thumbnail": "https://imgur.com/8utR5ug.png",
+        "footer": "Tropic Team",
+        "colors": {
+            "mainColor": "#2F3136",
+            "positive": "#2F3136",
+            "negative": "#2F3136"
+        }
+    },
+    "roles": {
+        "newMember": "",
+        "muted": "838184976461463641"
+    },
+    "logs": {
+        "suggestion": {
+            "suggestion_pending": "845341678926692362",
+            "suggestion_accepted": "845341678926692362",
+            "suggestion_denied": "845341678926692362"
+        },
+        "bugreport": {
+            "bugreport_pending": "845422887653343242",
+            "bugreport_accepted": "845422887653343242",
+            "bugreport_denied": "845422887653343242"
+        }
     },
     "suggestion": {
         "colors": {
@@ -46,12 +77,12 @@
         },
     "bugreport": {
         "colors": {
-            "pending": "",
-            "accepted": "",
-            "denied": ""
+            "pending": "#2F3136",
+            "accepted": "#2F3136",
+            "denied": "#2F3136"
         },
         "pending": {
-            "thumbnail": ""
+            "thumbnail": "https://imgur.com/eO1QUX2.png"
         },
         "accepted": {
             "thumbnail": ""
@@ -70,6 +101,9 @@
             "topic_8": [],
             "topic_9": [],
             "topic_10": []
+        },
+        "ticket": {
+            "": ""
             }
         }
     }

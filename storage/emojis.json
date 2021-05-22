@@ -1,11 +1,9 @@
 {
-    "emojis": {
-        "loading": "<a:loading:839159302270877806>",
-        "shutdown": "<:shutdown:839222722663415818>",
-        "success": "<a:success:839221736733278319>",
-        "error": "<a:error:839222021430837268>",
-        "boost": "<a:boost:839222358442508329>",
-        "thumbsup": "<a:thumbs_up:840340182246883398>",
-        "thumbsdown": "<a:thumbs_down:840340240426336316>"
-    }
+    "loading": "<a:loading:839159302270877806>",
+    "shutdown": "<:shutdown:839222722663415818>",
+    "success": "<a:success:839221736733278319>",
+    "error": "<a:error:839222021430837268>",
+    "boost": "<a:boost:839222358442508329>",
+    "thumbsup": "<a:thumbs_up:840340182246883398>",
+    "thumbsdown": "<a:thumbs_down:840340240426336316>"
 }

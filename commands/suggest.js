@@ -1,24 +1,27 @@
 const messageUtils = require('../util/messageUtils');
 const db = require('../db');
-const { MessageEmbed } = require('discord.js');
+const Discord = require('discord.js');
 const config = require('../storage/config.json')
+const emoji = require('../storage/emojis.json')
+const lang = require('../storage/lang.json')
 const logger = require('../logger.js')
 
 const suggest = require("./suggest");
 
 module.exports.run = async (Client, msg, args) => {
 
-    const error = new MessageEmbed()
-    .setColor(config.embed.color)
-    .setFooter(`${config.prefix}${suggest.help.usage} - to create a suggestion.`)
+    const error = new Discord.MessageEmbed()
+    .setColor(config.embed.colors.mainColor)
+    .setFooter(`${config.settings.prefix}${suggest.help.usage} ${lang.suggestion.pending.error.error_footer}`)
     .setTimestamp()
-    .setTitle("Suggestion Creation")
-    .setDescription(`Please put a valid topic!\n\n**Example:** *${config.prefix}suggest Discord Add more voice channels*\n\n**Topics:**\n\u3000${config.suggestion.suggestion_topics.topic_1}\n\u3000${config.suggestion.suggestion_topics.topic_2}\n\u3000${config.suggestion.suggestion_topics.topic_3}\n\u3000${config.suggestion.suggestion_topics.topic_4}\n\u3000${config.suggestion.suggestion_topics.topic_5}\n\u3000${config.suggestion.suggestion_topics.topic_6}\n\u3000${config.suggestion.suggestion_topics.topic_7}\n\u3000${config.suggestion.suggestion_topics.topic_8}\n\u3000${config.suggestion.suggestion_topics.topic_9}\n\u3000${config.suggestion.suggestion_topics.topic_10}`)
+    .setThumbnail(config.embed.thumbnail)
+    .setTitle(`${lang.suggestion.pending.error.error_title}`)
+    .setDescription(`${lang.suggestion.pending.error.error_description_1}\n\n${lang.suggestion.pending.error.error_description_2} *${config.settings.prefix}${lang.suggestion.pending.error.error_description_3}*\n\n${lang.suggestion.pending.error.error_description_4}\n\u3000${config.suggestion.topics.topic_1}\n\u3000${config.suggestion.topics.topic_2}\n\u3000${config.suggestion.topics.topic_3}\n\u3000${config.suggestion.topics.topic_4}\n\u3000${config.suggestion.topics.topic_5}\n\u3000${config.suggestion.topics.topic_6}\n\u3000${config.suggestion.topics.topic_7}\n\u3000${config.suggestion.topics.topic_8}\n\u3000${config.suggestion.topics.topic_9}\n\u3000${config.suggestion.topics.topic_10}`)
 
     if (!args[0]) {
         return messageUtils.sendSyntaxError(msg.channel, this);
     }
-    let allowedTopics = [config.suggestion.suggestion_topics.topic_1, config.suggestion.suggestion_topics.topic_2, config.suggestion.suggestion_topics.topic_3, config.suggestion.suggestion_topics.topic_4, config.suggestion.suggestion_topics.topic_5, config.suggestion.suggestion_topics.topic_6, config.suggestion.suggestion_topics.topic_7, config.suggestion.suggestion_topics.topic_8, config.suggestion.suggestion_topics.topic_9, config.suggestion.suggestion_topics.topic_10]; // Move this elsewhere and add more
+    let allowedTopics = [config.suggestion.topics.topic_1, config.suggestion.topics.topic_2, config.suggestion.topics.topic_3, config.suggestion.topics.topic_4, config.suggestion.topics.topic_5, config.suggestion.topics.topic_6, config.suggestion.topics.topic_7, config.suggestion.topics.topic_8, config.suggestion.topics.topic_9, config.suggestion.topics.topic_10]; // Move this elsewhere and add more
     const topic = allowedTopics.includes(args[0].toLowerCase()) ? args[0].toLowerCase() : false;
     if(!topic) {
       msg.channel.send(error)
@@ -26,39 +29,41 @@ module.exports.run = async (Client, msg, args) => {
     }
     const suggestion = topic ? args.slice(1).join(" ") : args.join(" ");
     
-    const embed = new MessageEmbed()
-    .setColor(config.suggestion.suggestion_colors.pending)
-    .setFooter(`Suggestion ID:`)
-    .setTimestamp()
-    .setAuthor(`Suggestion from ${msg.author.username}`, msg.author.avatarURL({ dynamic: true }))
-    .setThumbnail(config.suggestion.pendingSuggestions.thumbnail)
-    .setDescription(`**Topic:** \`${topic}\`\n\n**Suggestion:**\n\`${suggestion}\``)
-
-    const success = new MessageEmbed()
-    .setAuthor(`${msg.author.username}'s suggestion was posted!`, msg.author.avatarURL({ dynamic: true }))
-    .setColor(config.embed.color)
-    .setDescription(`Your suggestion was successfully posted in <#${config.suggestion.pendingSuggestions.channel}>.`)
-    .setFooter(`Suggestion Created!`)
+    const embed = new Discord.MessageEmbed()
+    .setAuthor(`${lang.suggestion.pending.pending_author} ${msg.author.username}`, msg.author.avatarURL({ dynamic: true }))
+    .setColor(config.suggestion.colors.pending)
+    .addField(`${lang.suggestion.pending.pending_topic}`, `\`${topic}\``)
+    .addField(`${lang.suggestion.pending.pending_suggestion}`, `\`${suggestion}\``)
+    .setThumbnail(config.suggestion.pending.thumbnail)
+    .setFooter(`${lang.suggestion.pending.pending_footer}`)
     .setTimestamp()
 
-    msg.guild.channels.cache.get(config.suggestion.pendingSuggestions.channel).send(embed).then(async m => {
+    const success = new Discord.MessageEmbed()
+    .setAuthor(`${msg.author.username}${lang.suggestion.pending.success.success_author}`, msg.author.avatarURL({ dynamic: true }))
+    .setColor(config.embed.colors.mainColor)
+    .setThumbnail(config.embed.thumbnail)
+    .setDescription(`${lang.suggestion.pending.success.success_description_1} <#${config.channels.pendingSuggestions}>${lang.suggestion.pending.success.success_description_2}`)
+    .setFooter(`${lang.suggestion.pending.success.success_footer}`)
+    .setTimestamp()
 
-        const messages = await msg.guild.channels.cache.get(config.suggestion.pendingSuggestions.channel).messages.fetch({ limit: 1 });
+    msg.guild.channels.cache.get(config.channels.pendingSuggestions).send(embed).then(async m => {
+
+        const messages = await msg.guild.channels.cache.get(config.channels.pendingSuggestions).messages.fetch({ limit: 1 });
         const lastMessage = messages.last();
 
         lastMessage.edit(
-            new MessageEmbed()
-            .setAuthor(`Suggestion from ${msg.author.username}`, msg.author.avatarURL({ dynamic: true }))
-            .setColor(config.suggestion.suggestion_colors.pending)
-            .addField("Topic:", `\`${topic}\``)
-            .addField("Suggestion:", `\`${suggestion}\``)
-            .setThumbnail(config.suggestion.pendingSuggestions.thumbnail)
-            .setFooter(`Suggestion ID: ${m.id}`)
+            new Discord.MessageEmbed()
+            .setAuthor(`${lang.suggestion.pending.pending_author} ${msg.author.username}`, msg.author.avatarURL({ dynamic: true }))
+            .setColor(config.suggestion.colors.pending)
+            .addField(`${lang.suggestion.pending.pending_topic}`, `\`${topic}\``)
+            .addField(`${lang.suggestion.pending.pending_suggestion}`, `\`${suggestion}\``)
+            .setThumbnail(config.suggestion.pending.thumbnail)
+            .setFooter(`${lang.suggestion.pending.pending_footer} ${m.id}`)
             .setTimestamp()
         );
         await msg.channel.send(success);
-        await m.react(config.emojis.success);
-        await m.react(config.emojis.error);
+        await m.react(emoji.thumbsup);
+        await m.react(emoji.thumbsdown);
         db.models.Suggestion.create({
             suggestion,
             status: null,
@@ -69,11 +74,15 @@ module.exports.run = async (Client, msg, args) => {
 }
 
 module.exports.help = {
-    name: "suggest",
-    description: "Create a suggestion.",
+    name: `${lang.suggestion.settings.command_name}`,
+    description: `${lang.suggestion.settings.command_description}`,
     permissions: [],
     alias: [
-        "suggestion"
+        `${lang.suggestion.settings.command_aliases.alias_1}`,
+        `${lang.suggestion.settings.command_aliases.alias_2}`,
+        `${lang.suggestion.settings.command_aliases.alias_3}`,
+        `${lang.suggestion.settings.command_aliases.alias_4}`,
+        `${lang.suggestion.settings.command_aliases.alias_5}`
     ],
-    usage: "suggest <topic> <suggestion>",
+    usage: `${lang.suggestion.settings.command_usage}`,
 }
