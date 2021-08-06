@@ -9,9 +9,10 @@ const logger = require('../logger.js')
 const suggest = require("./suggest");
 
 module.exports.run = async (Client, msg, args) => {
+    msg.delete();
 
     const error = new Discord.MessageEmbed()
-    .setColor(config.embed.colors.mainColor)
+    .setColor(config.embed.colors.negative)
     .setFooter(`${config.settings.prefix}${suggest.help.usage} ${lang.suggestion.pending.error.error_footer}`)
     .setTimestamp()
     .setThumbnail(config.embed.thumbnail)
@@ -40,7 +41,7 @@ module.exports.run = async (Client, msg, args) => {
 
     const success = new Discord.MessageEmbed()
     .setAuthor(`${msg.author.username}${lang.suggestion.pending.success.success_author}`, msg.author.avatarURL({ dynamic: true }))
-    .setColor(config.embed.colors.mainColor)
+    .setColor(config.embed.colors.positive)
     .setThumbnail(config.embed.thumbnail)
     .setDescription(`${lang.suggestion.pending.success.success_description_1} <#${config.channels.pendingSuggestions}>${lang.suggestion.pending.success.success_description_2}`)
     .setFooter(`${lang.suggestion.pending.success.success_footer}`)
@@ -62,10 +63,27 @@ module.exports.run = async (Client, msg, args) => {
             .setTimestamp()
         );
         await msg.channel.send(success);
+
+        const logs = new Discord.MessageEmbed()
+        .setAuthor(`${lang.suggestion.pending.logs.logs_title}`, msg.author.avatarURL({ dynamic: true }))
+        .setColor(config.suggestion.colors.pending)
+        .setThumbnail(config.embed.thumbnail)
+        .setDescription(`${lang.suggestion.pending.logs.logs_description_1}
+        ${lang.suggestion.pending.logs.logs_description_2} <@${msg.author.id}>
+        ${lang.suggestion.pending.logs.logs_description_3} \`${msg.author.id}\`
+        ${lang.suggestion.pending.logs.logs_description_4} \`${m.id}\`
+        ${lang.suggestion.pending.logs.logs_description_5} \`${topic}\`
+        ${lang.suggestion.pending.logs.logs_description_6}
+        \`${suggestion}\``)
+        .setTimestamp()
+
+        await msg.guild.channels.cache.get(config.logs.suggestion.suggestion_pending).send(logs)
         await m.react(emoji.thumbsup);
         await m.react(emoji.thumbsdown);
+
         db.models.Suggestion.create({
             suggestion,
+            topic,
             status: null,
             msg: m.id,
             author: msg.author.id
@@ -74,15 +92,13 @@ module.exports.run = async (Client, msg, args) => {
 }
 
 module.exports.help = {
-    name: `${lang.suggestion.settings.command_name}`,
-    description: `${lang.suggestion.settings.command_description}`,
+    name: `${config.suggestion.settings.suggest.command_name}`,
+    description: `${config.suggestion.settings.suggest.command_description}`,
     permissions: [],
     alias: [
-        `${lang.suggestion.settings.command_aliases.alias_1}`,
-        `${lang.suggestion.settings.command_aliases.alias_2}`,
-        `${lang.suggestion.settings.command_aliases.alias_3}`,
-        `${lang.suggestion.settings.command_aliases.alias_4}`,
-        `${lang.suggestion.settings.command_aliases.alias_5}`
+        `${config.suggestion.settings.suggest.command_aliases.alias_1}`,
+        `${config.suggestion.settings.suggest.command_aliases.alias_2}`,
+        `${config.suggestion.settings.suggest.command_aliases.alias_3}`
     ],
-    usage: `${lang.suggestion.settings.command_usage}`,
+    usage: `${config.suggestion.settings.suggest.command_usage}`,
 }

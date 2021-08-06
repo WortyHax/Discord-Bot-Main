@@ -1,6 +1,7 @@
 const discord = require("discord.js");
 const _ = require("lodash");
 const config = require("../storage/config.json");
+const lang = require("../storage/lang.json");
 const getTotal = require("../util/getTotalInvites")
 
 function removeDuplicates(myArr, prop) {
@@ -16,6 +17,7 @@ function removeDuplicates(myArr, prop) {
  * @param {string[]} args 
  */
 module.exports.run = (Client, msg, args) => {
+    msg.delete();
     msg.guild.fetchInvites().then(async invites => {
         let invs = [...invites.sort((a, b) => b.uses - a.uses).values()];
 
@@ -31,19 +33,28 @@ module.exports.run = (Client, msg, args) => {
         
         msg.channel.send({
             embed: {
-                color: config.embed.color,
-                footer: config.embed.footer,
-                title: `Invites Leaderboard`,
-                description: top
+                color: config.embed.colors.mainColor,
+                footer: {
+                    text: `${lang.invite_tracker.invite_top.top_footer} ${msg.author.username}`,
+                    icon_url: msg.author.avatarURL({ dynamic: true })
+                },
+                title: `${lang.invite_tracker.invite_top.top_title}`,
+                description: `${top}\n${lang.invite_tracker.invite_top.top_description}`
             }
         });
     })
 }
 
 module.exports.help = {
-    name: "invitetop",
-    description: "Invites leaderboard",
+    name: `${config.invite_tracker.invite_top.command_name}`,
+    description: `${config.invite_tracker.invite_top.command_description}`,
     permissions: [],
-    alias: [],
-    usage: "invitetop",
+    alias: [
+            `${config.invite_tracker.invite_top.command_aliases.alias_1}`,
+            `${config.invite_tracker.invite_top.command_aliases.alias_2}`,
+            `${config.invite_tracker.invite_top.command_aliases.alias_3}`,
+            `${config.invite_tracker.invite_top.command_aliases.alias_4}`,
+            `${config.invite_tracker.invite_top.command_aliases.alias_5}`
+    ],
+    usage: `${config.invite_tracker.invite_top.command_usage}`,
 }

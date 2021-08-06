@@ -1,6 +1,8 @@
 const ms = require("ms")
 const discord = require("discord.js");
 const config = require("../storage/config.json");
+const lang = require("../storage/lang.json")
+const emoji = require("../storage/emojis.json")
 
 /**
  * 
@@ -13,39 +15,74 @@ module.exports.run = (Client, msg, args) => {
     if (!msg.mentions.users.first()) {
         return msg.channel.send({
             embed: {
-                color: config.embed.color,
-                footer: config.embed.footer,
-                title: "You have not specified a user to mute!",
+                color: config.embed.colors.negative,
+                footer: {
+                    "text": `${lang.mute.fail.footer} ${msg.author.username}`,
+                    "icon_url": msg.author.avatarURL({ dynamic: true })
+                },
+                fields: [
+                    {
+                        "name": `${emoji.error} ${lang.mute.fail.title}`,
+                        "value": `${lang.mute.fail.description}`
+                    }
+                ],
             }
         });
     }
 
     let reason = args.slice(1).join(" ");
-    if (reason.length <= 0) reason = "No reason!";
-    const role = msg.guild.roles.cache.find(x => x.id === config.mutedRole);
+    if (reason.length <= 0) reason = `${lang.mute.reason}`;
+    const role = msg.guild.roles.cache.find(x => x.id === config.roles.muted);
+    const usertomute = msg.mentions.users.first();
+    const logs = Client.channels.cache.get(config.logs.logs.moderation)
 
     msg.guild.member(msg.mentions.users.first()).roles.add(role).then(_ => {
         const embed = new discord.MessageEmbed()
-        .setColor(config.embed.color)
-        .setFooter(config.embed.footer)
-        .setTitle("User muted!")
+        .setColor(config.embed.colors.mainColor)
+        .setFooter(config.embed.footer, config.embed.thumbnail)
+        .setTitle(`${lang.mute.success.title}`)
+        .setThumbnail(usertomute.displayAvatarURL({ dynamic: true }))
         .setTimestamp()
-        .setDescription(`${msg.mentions.users.first()} has been muted!`);
+        .setDescription(`${msg.mentions.users.first()} ${lang.mute.success.description}`);
 
-        msg.channel.send(embed);
+        const muteLogs = new discord.MessageEmbed()
+        .setColor(config.embed.colors.mainColor)
+        .setAuthor(`${lang.mute.logs.title}`, msg.author.avatarURL({ dynamic: true }))
+        .setThumbnail(config.embed.thumbnail)
+        .setDescription(`
+        ${lang.mute.logs.description_1}
+        ${lang.mute.logs.description_2} <@${msg.author.id}>
+        ${lang.mute.logs.description_3} \`${msg.author.id}\`
+        ${lang.mute.logs.description_4} <@${msg.mentions.users.first().id}>
+        ${lang.mute.logs.description_5} \`${msg.mentions.users.first().id}\`
+        ${lang.mute.logs.description_6}
+        \`${reason}\``)
 
-        embed.setTitle(`You have been muted in ${msg.guild.name}!`)
-        .setDescription(`**Reason:**\n${reason}`);
+        msg.channel.send(embed)
+        logs.send(muteLogs)
+
+        embed.setTitle(`${lang.mute.dm.title}`)
+        .setDescription(`${lang.mute.dm.description_1} **${msg.guild.name}**${lang.mute.dm.description_2}\n
+        ${lang.mute.dm.description_3}
+        \`${reason}\``);
         msg.mentions.users.first().send(embed);
     });
 }
 
 module.exports.help = {
-    name: "mute",
-    description: "Mute someone!",
+    name: `${config.mute.command_name}`,
+    description: `${config.mute.command_description}`,
     permissions: [
-        "KICK_MEMBERS"
+        `${config.mute.command_permissions.permission_1}`,
+        `${config.mute.command_permissions.permission_2}`,
+        `${config.mute.command_permissions.permission_3}`,
+        `${config.mute.command_permissions.permission_4}`,
+        `${config.mute.command_permissions.permission_5}`
     ],
-    alias: [],
-    usage: "mute [@user] <reason>",
+    alias: [
+        `${config.mute.command_aliases.alias_1}`,
+        `${config.mute.command_aliases.alias_2}`,
+        `${config.mute.command_aliases.alias_3}`
+    ],
+    usage: `${config.mute.command_usage}`,
 }

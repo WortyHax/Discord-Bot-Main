@@ -1,17 +1,29 @@
 {
-    "suggestion": {
-        "settings": {
-            "command_name": "suggest",
-            "command_description": "Create a suggestion.",
-            "command_usage": "suggest <topic> <suggestion>",
-            "command_aliases": {
-                "alias_1": "suggestion",
-                "alias_2": [],
-                "alias_3": [],
-                "alias_4": [],
-                "alias_5": []
-            }
+    "avatar": {
+        "avatar_self": {
+            "self_title": "Your avatar!",
+            "self_description": "Avatar Link"
         },
+        "avatar_other": {
+            "other_title": "'s Avatar!",
+            "other_description": "Avatar Link"
+        }
+    },
+    "invite_tracker": {
+        "invite_check": {
+            "check_author": "'s invites",
+            "check_description_1": "_currently have_",
+            "check_description_2": "_invites!_",
+            "check_footer_1": "Use",
+            "check_footer_2": "- to check invite top."
+        },
+        "invite_top": {
+            "top_title": "Invites Leaderboard",
+            "top_description": "_(( **TIP:** Create your own invite link to gain invites! ))_",
+            "top_footer": "Command issued by:"
+        }
+    },
+    "suggestion": {
         "pending": {
             "pending_author": "Suggestion from",
             "pending_topic": "Topic:",
@@ -30,7 +42,803 @@
                 "error_description_3": "suggest Discord Add more voice channels",
                 "error_description_4": "**Topics:**",
                 "error_footer": "- to create a suggestion."
+            },
+            "logs": {
+                "logs_title": "Suggestion Log",
+                "logs_description_1": "**Suggestion Log:",
+                "logs_description_2": "➥ Suggester:",
+                "logs_description_3": "➥ Suggester ID:",
+                "logs_description_4": "➥ Suggestion ID:",
+                "logs_description_5": "➥ Topic:",
+                "logs_description_6": "➥ Suggestion:"
             }
+        },
+        "accepted": {
+            "accepted_author": "Suggestion from",
+            "accepted_title": "New suggestion accepted!",
+            "accepted_topic": "**Topic:**",
+            "accepted_suggestion": "**Suggestion:**",
+            "accepted_information": "**Infomation:**",
+            "accepted_status_1": "Status:",
+            "accepted_status_2": "Accepted",
+            "accepted_reason": "**Reason:**",
+            "accepted_footer_1": "Thanks for your suggestion",
+            "accepted_footer_2": "!",
+            "dm": {
+                "title": "Your suggestion has been accepted!",
+                "description_1": "**Reason:**",
+                "description_2": "Thank you for your suggestion. After consideration, we have decided that we will accept this suggestion and implement any necessary changes to implement this. Thank you! 😄",
+                "footer": "Suggestion was accepted by:"
+            },
+            "error": {
+                "no_reason": "No Reason!",
+                "no_suggestion_found": "No Suggestion found with ID:"
+            },
+            "logs": {
+                "logs_title": "Suggestion Log",
+                "logs_description_1": "**Accepted Suggestion Log:**",
+                "logs_description_2": "➥ Suggester:",
+                "logs_description_3": "➥ Suggester ID:",
+                "logs_description_4": "➥ Accepted by:",
+                "logs_description_5": "➥ Reason:",
+                "logs_description_6": "➥ Suggestion ID:",
+                "logs_description_7": "➥ Topic:",
+                "logs_description_8": "➥ Suggestion:"
+            }
+        },
+        "denied": {
+            "denied_author": "Suggestion from",
+            "denied_title": "New suggestion denied",
+            "denied_topic": "**Topic:**",
+            "denied_suggestion": "**Suggestion:**",
+            "denied_information": "**Infomation:**",
+            "denied_status_1": "Status:",
+            "denied_status_2": "Denied",
+            "denied_reason": "**Reason:**",
+            "denied_footer_1": "We appreciate that you took your time creating this",
+            "denied_footer_2": "!",
+            "dm": {
+                "title": "Your suggestion has been denied!",
+                "description_1": "**Reason:**",
+                "description_2": "Thank you for your suggestion. After consideration, we have decided that we will not implement this. We try our best to keep the server brilliant, but your suggestion was denied. We appreciate that you took your time creating your suggestion! 😄",
+                "footer": "Suggestion was denied by:"
+            },
+            "error": {
+                "no_reason": "No Reason!",
+                "no_suggestion_found": "No Suggestion found with ID:"
+            },
+            "logs": {
+                "logs_title": "Suggestion Log",
+                "logs_description_1": "**Denied Suggestion Log:**",
+                "logs_description_2": "➥ Suggester:",
+                "logs_description_3": "➥ Suggester ID:",
+                "logs_description_4": "➥ Denied by:",
+                "logs_description_5": "➥ Reason:",
+                "logs_description_6": "➥ Suggestion ID:",
+                "logs_description_7": "➥ Topic:",
+                "logs_description_8": "➥ Suggestion:"
+            }
+        }
+    },
+    "bugreport": {
+        "pending": {
+            "pending_author": "BugReport from",
+            "pending_topic": "Topic:",
+            "pending_bugreport": "BugReport:",
+            "pending_footer": "BugReport ID:",
+            "success": {
+                "success_author": "'s bugReport was posted!",
+                "success_description_1": "Your bugReport was successfully posted in",
+                "success_description_2": ".",
+                "success_footer": "BugReport Created!"
+            },
+            "error": {
+                "error_title": "BugReport Creation",
+                "error_description_1": "Please put a valid topic!",
+                "error_description_2": "**Example:**",
+                "error_description_3": "bugReport Discord There is a permission error in announcement channel.",
+                "error_description_4": "**Topics:**",
+                "error_footer": "- to create a bugReport."
+            },
+            "logs": {
+                "logs_title": "BugReport Log",
+                "logs_description_1": "**BugReport Log:**",
+                "logs_description_2": "➥ Reporter:",
+                "logs_description_3": "➥ Reporter ID:",
+                "logs_description_4": "➥ BugReport ID:",
+                "logs_description_5": "➥ Topic:",
+                "logs_description_6": "➥ BugReport:"
+            }
+        },
+        "accepted": {
+            "accepted_author": "BugReport from",
+            "accepted_title": "New bugreport accepted!",
+            "accepted_topic": "**Topic:**",
+            "accepted_bugreport": "**BugReport:**",
+            "accepted_information": "**Infomation:**",
+            "accepted_status_1": "Status:",
+            "accepted_status_2": "Accepted",
+            "accepted_reason": "**Reason:**",
+            "accepted_footer_1": "Thanks for your bugreport",
+            "accepted_footer_2": "!",
+            "dm": {
+                "title": "Your bugreport has been accepted!",
+                "description_1": "**Reason:**",
+                "description_2": "Thank you for your bugreport. After consideration, we have decided that we will accept this bugreport and implement any necessary changes to implement this. Thank you! 😄",
+                "footer": "BugReport was accepted by:"
+            },
+            "error": {
+                "no_reason": "No Reason!",
+                "no_bugreport_found": "No BugReport found with ID:"
+            },
+            "logs": {
+                "logs_title": "BugReport Log",
+                "logs_description_1": "**Accepted BugReport Log:**",
+                "logs_description_2": "➥ Reporter:",
+                "logs_description_3": "➥ Reporter ID:",
+                "logs_description_4": "➥ Accepted by:",
+                "logs_description_5": "➥ Reason:",
+                "logs_description_6": "➥ BugReport ID:",
+                "logs_description_7": "➥ Topic:",
+                "logs_description_8": "➥ BugReport:"
+            }
+        },
+        "denied": {
+            "denied_author": "BugReport from",
+            "denied_title": "New bugreport denied",
+            "denied_topic": "**Topic:**",
+            "denied_bugreport": "**BugReport:**",
+            "denied_information": "**Infomation:**",
+            "denied_status_1": "Status:",
+            "denied_status_2": "Denied",
+            "denied_reason": "**Reason:**",
+            "denied_footer_1": "We appreciate that you took your time creating this",
+            "denied_footer_2": "!",
+            "dm": {
+                "title": "Your bugreport has been denied!",
+                "description_1": "**Reason:**",
+                "description_2": "Thank you for your bugreport. After consideration, we have decided that we will not implement this. We try our best to keep the server brilliant, but your bugreport was denied. We appreciate that you took your time creating your bugreport! 😄",
+                "footer": "BugReport was denied by:"
+            },
+            "error": {
+                "no_reason": "No Reason!",
+                "no_bugreport_found": "No BugReport found with ID:"
+            },
+            "logs": {
+                "logs_title": "BugReport Log",
+                "logs_description_1": "**Denied BugReport Log:**",
+                "logs_description_2": "➥ Reporter:",
+                "logs_description_3": "➥ Reporter ID:",
+                "logs_description_4": "➥ Denied by:",
+                "logs_description_5": "➥ Reason:",
+                "logs_description_6": "➥ BugReport ID:",
+                "logs_description_7": "➥ Topic:",
+                "logs_description_8": "➥ BugReport:"
+            }
+        }
+    },
+    "reload": {
+        "success": {
+            "success_title": "Successfully reloaded a command!",
+            "success_description_1": "Successfully reloaded",
+            "success_description_2": "command!",
+            "success_footer": "Command issued by:"
+        },
+        "error": {
+            "not_a_valid_command": {
+                "command_title": "Not a valid command!",
+                "command_description": "Please enter a valid command.",
+                "command_footer": "Command issued by:"
+            },
+            "error": {
+                "error_title": "Could not reload that command!",
+                "error_description": "Could not reload command:",
+                "error_footer": "Command issued by:"
+            }
+        }
+    },
+    "restart": {
+        "success": {
+            "success_title": "Bot is restarting...",
+            "success_description": "bot is restarting, bot is available to use in about 30 seconds.",
+            "success_footer": "Tropic System"
+        }
+    },
+    "shutdown": {
+        "success": {
+            "success_title": "System is shutting down...",
+            "success_description": "Shutting down system!",
+            "success_footer": "Shutdown issued by"
+        },
+        "console_log": {
+            "separators": "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬",
+            "system_shutdown": "!!! System Shutdown !!!",
+            "issued_by": "System was shutdowned by:"
+        }
+    },
+    "help": {
+        "help_command": {
+            "valid_commands": {
+                "command_title": "Invalid command!",
+                "command_footer": "Command issued by:",
+                "command_fields": {
+                    "command_field_1": "Regular Commands:",
+                    "command_field_2": "Permission Commands:"
+                }
+            },
+            "command_info": {
+                "info_title": "Info for",
+                "info_author": "Command Helper",
+                "info_footer": "Command issued by:",
+                "info_fields": {
+                    "info_field_1": "Usage:",
+                    "info_field_2": "Aliases:",
+                    "info_no_aliases": "No Aliases",
+                    "info_field_3": "Required permissions:",
+                    "info_no_permission": "None"
+                }
+            },
+            "help_panel": {
+                "all_pages": {
+                    "arg_required_1": "<>",
+                    "arg_required_2": ": arg required.",
+                    "arg_optional_1": "[]",
+                    "arg_optional_2": ": arg optional.",
+                    "new_command_line": "➥",
+                    "seperate_command": "-",
+                    "arrows_1": "Use the",
+                    "arrows_2": "arrows",
+                    "arrows_3": "to go to other pages!",
+                    "page_1_contents": "**Page 1 contents:**",
+                    "page_1_contents_text": "Basic, Suggestion and Bugreport, Fun",
+                    "page_2_contents": "**Page 2 contents:**",
+                    "page_2_contents_text": "Moderation, Owner",
+                    "page_3_contents": "**Page 3 contents:**",
+                    "page_3_contents_text": "Tickets, Invites, Other",
+                    "page_4_contents": "**Page 4 contents:**",
+                    "page_4_contents_text": "Service Bot"
+                },
+                "help_page_1": {
+                    "page_1_title": "Help & Information [Page 1]",
+                    "page_1_description_1": "**Basic Commands:**",
+                    "page_1_description_2": "**Suggestion and Bugreport:**",
+                    "page_1_description_3": "**Fun Commands:**",
+                    "end_of_page_1": "**End of page 1:**"
+                },
+                "help_page_2": {
+                    "page_2_title": "Help & Information [Page 2]",
+                    "page_2_description_1": "**Moderation:**",
+                    "page_2_description_2": "**Owner Commands:**",
+                    "end_of_page_2": "**End of page 2:**"
+                },
+                "help_page_3": {
+                    "page_3_title": "Help & Information [Page 3]",
+                    "page_3_description_1": "**Ticket:**",
+                    "page_3_description_2": "**Invites:**",
+                    "page_3_description_3": "**Other:**",
+                    "end_of_page_3": "**End of page 3:**"
+                },
+                "help_page_4": {
+                    "page_4_title": "Help & Information [Page 4]",
+                    "service_bot_prefix": "-",
+                    "page_4_description_1": "**Service Bot Commands:**",
+                    "end_of_page_4": "**End of page 4:**",
+                    "service_commands": {
+                        "add": "add <user>",
+                        "add_description": "Add a user to your ticket.",
+                        "remove": "remove <user>",
+                        "remove_description": "Remove a user from your ticket.",
+                        "ticketPanel": "ticketPanel",
+                        "ticketPanel_description": "Creates a ticket panel.",
+                        "stop": "stop",
+                        "stop_description": "Restarts the bot.",
+                        "promote": "promote <user>",
+                        "promote_description": "Promotes mentioned user to freelancer.",
+                        "demote": "demote <user>",
+                        "demote_description": "Demotes mentioned user from freelancer.",
+                        "freelancerInfo": "freelancerInfo <freelancer>",
+                        "freelancerInfo_description": "Shows mentioned freelancers information.",
+                        "quote": "quote <ticketID> <$amount>",
+                        "quote_description": "Freelancers can give offers to services.",
+                        "review": "review",
+                        "review_description": "Review a freelancer.",
+                        "invoice": "invoice <subTotal> <service>",
+                        "invoice_description": "Creates an invoice for the client to pay.",
+                        "permissions": "permissions <user / role>",
+                        "permissions_description": "See permissions of a user or role.",
+                        "permissionsAdd": "permissions add <role> <permission> <true / false>",
+                        "permissionsAdd_description": "Add a permission to mentioned role.",
+                        "permissionsRemove": "permissions remove <role> <permission> <true / false>",
+                        "permissionsRemove_description": "Remove a permission from mentioned role.",
+                        "portfolio": "portfolio",
+                        "portfolio_description": "Freelancer can view their own portfolio.",
+                        "portfolioAdd": "portfolio add <portfolio text / link>",
+                        "portfolioAdd_description": "Freelancer can add their portfolio text / link.",
+                        "portfolioRemove": "portfolio remove <portfolio text / link>",
+                        "portfolioRemove_description": "Freelancer can remove their portfolio text or link.",
+                        "set": "set",
+                        "set_description": "Sets that guild to the bot.",
+                        "setRoles": "set roles <role> <user>",
+                        "setRoles_description": "Adds role to a freelancer.",
+                        "setCategory": "set category <key>",
+                        "setCategory_description": "Sets that category in discord.json (Do not use its broken).",
+                        "setChannel": "set channel <key>",
+                        "setChannel_description": "Sets that channel in discord.json (Do not use its broken).",
+                        "close": "close",
+                        "close_description": "Close a ticket.",
+                        "offers": "offers <ticketID>",
+                        "offers_description": "Checks offers for a Service ticket."
+                    }
+                }
+            }
+        }
+    },
+    "member_count": {
+        "count_title": "Total Members in",
+        "count_footer": "Command issued by:",
+        "count_description": "**Member Count:**",
+        "count_total": "➥ Total:",
+        "count_online": "➥ Online:",
+        "count_idle": "➥ Idle:",
+        "count_dnd": "➥ Do Not Disturb:",
+        "count_offline": "➥ Offline:"
+    },
+    "serverInfo": {
+        "roles": {
+            "to_many_roles": "To many roles to display!",
+            "no_roles": "No roles to display!"
+        },
+        "serverInfo_panel": {
+            "author": "Server Information",
+            "separators": "➥ ",
+            "general": {
+                "title": "**__General:__**",
+                "name": "Guild Name:",
+                "id": "Guild ID:",
+                "owner_1": "Guild Owner:",
+                "owner_2": "Tag:",
+                "owner_3": "ID:",
+                "region": "Regtion:",
+                "boost_tier_1": "Booster Tier:",
+                "boost_tier_2": "Tier",
+                "boost_tier_3": "none",
+                "explict_filter": "Explicit Filter:",
+                "verification_level": "Verification Level:",
+                "time_created": "Time Created:"
+            },
+            "statistics": {
+                "title": "**__Statistics:__**",
+                "role_count": "Role Count:",
+                "emoji_1": "Emoji:",
+                "emoji_2": "Total Emojis:",
+                "emoji_3": "Regular Emojis:",
+                "emoji_4": "Animated Emojis:",
+                "memberCount_1": "Member Count:",
+                "memberCount_2": "Total Members:",
+                "memberCount_3": "Humans:",
+                "memberCount_4": "Bots:",
+                "channels_1": "Channels:",
+                "channels_2": "Text Channels:",
+                "channels_3": "Voice Channels:",
+                "boost_count_1": "Boost Count:",
+                "boost_count_2": "0"
+            },
+            "presence": {
+                "title": "**__Presence:__**",
+                "presence_1": "Online:",
+                "presence_2": "Idle:",
+                "presence_3": "Do Not Disturb:",
+                "presence_4": "Offline:"
+            },
+            "roles": {
+                "author_1": "Role List",
+                "author_2": "[",
+                "author_3": "roles]",
+                "title": "**__Roles:__**"
+            }
+        }
+    },
+    "botInfo": {
+        "title": "System Information",
+        "separators": "➥ ",
+        "general": {
+            "title": "**__General:__**",
+            "bot_name": "Bot Name:",
+            "commands": "Commands:",
+            "memberCount": "Member Count:",
+            "channels": "Channels:",
+            "server_creationDate": "Server Creation Date:",
+            "bot_creationDate": "Bot Creation Date:",
+            "nodeJS": "NodeJS Version:",
+            "botVersion_1": "Bot Version:",
+            "botVersion_2": "v"
+        },
+        "system": {
+            "title": "**__System:__**",
+            "platform": "Platform:",
+            "uptime_1": "Uptime:",
+            "uptime_2": "DD:HH:MM:SS",
+            "cpu_1": "Cpu:",
+            "cpu_2": "Cores:",
+            "cpu_3": "Model:",
+            "cpu_4": "Speed:",
+            "cpu_5": "MHz",
+            "ram": "Ram:",
+            "totalMemory": "Total Memory:",
+            "freeMemory": "Free Memory:",
+            "gb": "GB",
+            "mb": "MB",
+            "kb": "KB",
+            "colon": ":"
+        }
+    },
+    "ping": {
+        "title": "System Latency",
+        "description_title": "**__Latency:__**",
+        "latency_1": "Bot Latency is:",
+        "latency_2": "Discord API Latency is:",
+        "ms": "ms",
+        "dot": "."
+    },
+    "poll": {
+        "poll": {
+            "single": {
+                "title": "New Poll!",
+                "footer_1": "Poll created by",
+                "footer_2": "!"
+            },
+            "multiple": {
+                "title": "New poll!",
+                "description": "Please only vote on one option, if you don't have permission to vote for more.",
+                "footer_1": "Poll created by",
+                "footer_2": "!"
+            }
+        },
+        "success": {
+            "single": {
+                "title": "Poll Creator",
+                "description_1": "your poll was successful and was posted in",
+                "description_2": "!"
+            },
+            "multiple": {
+                "title": "Poll Creator",
+                "description_1": "your poll was successful and was posted in",
+                "description_2": "!"
+            }
+        },
+        "error": {
+            "timer": {
+                "title": "Poll Creator",
+                "description": "please wait before sending another poll."
+            },
+            "limit": {
+                "title": "Poll Creator",
+                "description_1": "Polls are limited to",
+                "description_2": "20",
+                "description_3": "options."
+            },
+            "invalidFormat": {
+                "title": "Poll Creator",
+                "description_1": "invalid poll format! Question and options should be wrapped in",
+                "description_2": "double quotes.",
+                "description_3": "Example:"
+            }
+        }
+    },
+    "purge": {
+        "args": {
+            "description": "Please put a valid number!",
+            "footer": "Invalid arguments! Use:"
+        },
+        "number": {
+            "description": "You can only delete 100 messages at once! (Discord rate limit)",
+            "footer": "Usage:"
+        },
+        "success": {
+            "description_1": "You have successfully deleted",
+            "description_2": "messages!",
+            "footer": "Successfully purged messages!"
+        }
+    },
+    "kick": {
+        "success": {
+            "title": "User Successfully Kicked!",
+            "description": "has been kicked successfully!",
+            "footer": "Kick was issued by:"
+        },
+        "fail1": {
+            "title": "User Failed to kick!",
+            "description": "Possibly because I do not have enough permissions to kick them!",
+            "footer": "Command issued by:"
+        },
+        "fail2": {
+            "title": "User Failed to kick!",
+            "description": "The user was not found in this guild!",
+            "footer": "Command issued by:"
+        },
+        "fail3": {
+            "title": "User Failed to kick!",
+            "description": "You did not mention a user to kick!",
+            "footer": "Command issued by:"
+        },
+        "reason": {
+            "title": "User Failed to kick!",
+            "description": "Please provide a reason!",
+            "footer": "Command issued by:"
+        },
+        "logs": {
+            "title": "Kick Logs",
+            "description_1": "**Kick Logs:**",
+            "description_2": "➥ Kick issued by:",
+            "description_3": "➥ Kicker ID:",
+            "description_4": "➥ User Kicked:",
+            "description_5": "➥ User ID",
+            "description_6": "➥ Reason:"
+        },
+        "dm": {
+            "title_1": "You have been Kicked from",
+            "title_2": "!",
+            "description": "Reason:"
+        },
+        "rawError": {
+            "title_1": "An error occured while",
+            "title_2": "tried to kick",
+            "description": "Raw error:"
+        }
+    },
+    "mute": {
+        "reason": "No reason!",
+        "success": {
+            "title": "User was successfully muted!",
+            "description": "has been muted."
+        },
+        "fail": {
+            "title": "User Failed to mute!",
+            "description": "You did not mention a user to mute!",
+            "footer": "Command issued by:"
+        },
+        "dm": {
+            "title": "You have been muted!",
+            "description_1": "You've been permanently muted in",
+            "description_2": ".",
+            "description_3": "**Reason:**"
+        },
+        "logs": {
+            "title": "Mute Logs",
+            "description_1": "**Mute Logs:**",
+            "description_2": "➥ Mute issued by:",
+            "description_3": "➥ Muter ID:",
+            "description_4": "➥ User Muted:",
+            "description_5": "➥ User ID:",
+            "description_6": "➥ Reason:"
+        }
+    },
+    "tempmute": {
+        "reason": "No reason!",
+        "success": {
+            "title": "User was successfully muted!",
+            "description": "has been tempmuted for"
+        },
+        "fail_1": {
+            "title": "User Failed to tempmute!",
+            "description": "You did not mention a user to tempmute!",
+            "footer": "Command issued by:"
+        },
+        "fail_2": {
+            "title": "Please put a valid expiry!",
+            "description": "You have either not specified an expiry or that is not a expiry I can understand!",
+            "footer": "Command issued by:"
+        },
+        "dm": {
+            "title": "You have been tempmuted!",
+            "description_1": "You've been tempmuted for",
+            "description_2": "in",
+            "description_3": ".",
+            "description_4": "**Reason:**"
+        },
+        "logs": {
+            "title": "Mute Logs",
+            "description_1": "**Tempmute Logs:**",
+            "description_2": "➥ Tempmute issued by:",
+            "description_3": "➥ Tempmuter ID:",
+            "description_4": "➥ User tempmuted:",
+            "description_5": "➥ User ID:",
+            "description_6": "➥ User muted for:",
+            "description_7": "➥ Reason:"
+        }
+    },
+    "unmute": {
+        "reason": "No reason!",
+        "success": {
+            "title": "User was successfully unmuted!",
+            "description": "has been unmuted."
+        },
+        "fail": {
+            "title": "User Failed to unmute!",
+            "description": "You did not mention a user to unmute!",
+            "footer": "Command issued by:"
+        },
+        "dm": {
+            "title": "You have been unmuted!",
+            "description_1": "You've been unmuted in",
+            "description_2": ".",
+            "description_3": "**Reason:**"
+        },
+        "logs": {
+            "title": "Mute Logs",
+            "description_1": "**Unmute Logs:**",
+            "description_2": "➥ Unmute issued by:",
+            "description_3": "➥ Unmuter ID:",
+            "description_4": "➥ User Unmuted:",
+            "description_5": "➥ User ID:",
+            "description_6": "➥ Reason:"
+        }
+    },
+    "ban": {
+        "success": {
+            "title": "User was successfully banned!",
+            "description_1": "has been banned by",
+            "description_2": ".",
+            "reason": {
+                "message_1": "banned",
+                "message_2": "for"
+            }
+        },
+        "fail": {
+            "title": "User Failed to ban!",
+            "description": "You did not mention a user to ban!",
+            "footer": "Command issued by:"
+        },
+        "fail1": {
+            "title": "User Failed to ban!",
+            "description": "Possibly because I do not have enough permissions to ban them!",
+            "footer": "Command issued by:"
+        },
+        "fail2": {
+            "title": "User Failed to ban!",
+            "description": "The user was not found in this guild!",
+            "footer": "Command issued by:"
+        },
+        "fail3": {
+            "title": "User Failed to ban!",
+            "description": "You did not mention a user to ban!",
+            "footer": "Command issued by:"
+        },
+        "fail4": {
+            "title": "User Failed to ban!",
+            "description": "Please specify a reason for this ban.",
+            "footer": "Command issued by:"
+        },
+        "logs": {
+            "title": "Ban Logs",
+            "description_1": "**Ban Logs:**",
+            "description_2": "➥ Ban issued by:",
+            "description_3": "➥ Banner ID:",
+            "description_4": "➥ User Banned:",
+            "description_5": "➥ User ID:",
+            "description_6": "➥ Reason:"
+        },
+        "dm": {
+            "title": "You have been banned!",
+            "description_1": "You've been banned in",
+            "description_2": ".",
+            "description_3": "**Reason:**"
+        },
+        "error": {
+            "title_1": "An error occured while",
+            "title_2": "tried to ban",
+            "field": "Raw error:"
+        }
+    },
+    "unban": {
+        "success": {
+            "title": "User was successfully unbanned!",
+            "description_1": "has been unbanned by",
+            "description_2": "."
+        },
+        "fail": {
+            "title": "User Failed to unban!",
+            "description": "You did not provide a user id to unban!",
+            "footer": "Command issued by:"
+        },
+        "fail1": {
+            "title": "User Failed to unban!",
+            "description": "User ID was invalid, please try again!",
+            "footer": "Command issued by:"
+        },
+        "fail2": {
+            "title": "User Failed to unban!",
+            "description": "Please provide a reason!",
+            "footer": "Command issued by:"
+        },
+        "logs": {
+            "title": "Unban Logs",
+            "description_1": "**Unban Logs:**",
+            "description_2": "➥ Unban issued by:",
+            "description_3": "➥ Unbanner ID:",
+            "description_4": "➥ User Unbanned:",
+            "description_5": "➥ User ID:",
+            "description_6": "➥ Reason:"
+        }
+    },
+    "emojis": {
+        "list": "Emoji List",
+        "animated_1": "**Animated: [",
+        "animated_2": "]**:",
+        "standard_1": "**Standard [",
+        "standard_2": "]**:",
+        "overall_1": "**Over all emojis [",
+        "overall_2": "]**",
+        "footer": "Command issued by:"
+    },
+    "announce": {
+        "success": {
+            "footer": "Announcement by:"
+        },
+        "announceCreator_1": {
+            "title": "What is the description for this announcement?",
+            "description": "Please provide a description for your announcement."
+        },
+        "announceCreator_2": {
+            "title": "Please enter a image URL for this announcement",
+            "description_1": "If you don't want to provide a image, enter",
+            "description_2": "."
+        },
+        "announceCreator_success": {
+            "title": "Announcement was successfully sent!",
+            "description_1": "Your announcement was successfully sent in",
+            "description_2": "!"
+        },
+        "fail_1": {
+            "title": "No title!",
+            "description_1": "Please provide a title to display on your embed.",
+            "description_2": "**Example:**",
+            "description_3": "No title!",
+            "description_4": "like the embed that is showing right now!",
+            "footer": "Command issued by:"
+        },
+        "error": {
+            "title": "Whoops an error has occured!",
+            "description": "Please check the console for more information about the error."
+        }
+    },
+    "gstart": {
+        "fail": {
+            "duration": "Invalid duration!"
+        },
+        "messages": {
+            "giveaway": "**New giveaway has started**",
+            "giveawayEnded": "**Giveaway has ended**",
+            "timeRemaining": "Time remaining:",
+            "inviteToParticipate_1": "React with",
+            "inviteToParticipate_2": "to participate!",
+            "winMessage": "Congratulations, {winners}! You won **{prize}**!\n{messageURL}",
+            "noWinner": "Giveaway was cancelled, no valid participations.",
+            "hostedBy": "Hosted by: {user}",
+            "winners": "winner(s)",
+            "endedAt": "Ended at"
+        }
+    },
+    "greroll": {
+        "fail": {
+            "invalid": "Invalid giveaway!"
+        },
+        "messages": {
+            "congratulations": ":tada: New winners: {winners}! Congratulation.",
+            "error": "No valid participants could be chosen!"
+        },
+        "error": {
+            "error": "An error occured while rerolling a giveaway"
+        }
+    },
+    "gedit": {
+        "fail": {
+            "invalid": "Invalid giveaway!",
+            "number": "Invalid number of winners!"
+        },
+        "success": {
+            "title": "Giveaway was successfully edited!",
+            "failed": "An error occured while editing a giveaway"
         }
     }
 }

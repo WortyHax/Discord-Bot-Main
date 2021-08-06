@@ -12,6 +12,6 @@ module.exports = (guild, title, description) => {
     .setTimestamp()
     .setDescription(`${description}`);
 
-    const channel = guild.channels.cache.get(config.logging.channel);
+    const channel = guild.channels.cache.get(config.logs.logs.moderation);
     channel.send(logembed);
 }

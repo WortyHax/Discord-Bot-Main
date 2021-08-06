@@ -2,8 +2,7 @@ const logger = require('../logger');
 const tickets = require("../storage/ticket.json")
 const config = require('../storage/config.json')
 
-module.exports.run = (Client) => {
-
+module.exports.run = async (Client) => {
 		console.log([
 			`Logged in as ${Client.user.tag}`
 		].join('\n'));

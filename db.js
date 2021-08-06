@@ -15,6 +15,10 @@ Suggestion.init({
         type: sequelize.DataTypes.STRING,
         allowNull: false
     },
+    topic: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: true 
+    },
     status: {
         type: sequelize.DataTypes.BOOLEAN,
         allowNull: true
@@ -35,9 +39,13 @@ Suggestion.init({
 });
 
 BugReport.init({
-    description: {
+    bugreport: {
         type: sequelize.DataTypes.STRING,
         allowNull: false
+    },
+    topic: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: true 
     },
     status: {
         type: sequelize.DataTypes.BOOLEAN,
@@ -48,7 +56,8 @@ BugReport.init({
         allowNull: false
     },
     msg: {
-        type: sequelize.DataTypes.STRING
+        type: sequelize.DataTypes.STRING,
+	allowNull: false
     },
     response: {
         type: sequelize.DataTypes.STRING

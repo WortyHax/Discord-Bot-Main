@@ -2,10 +2,12 @@ const discord = require('discord.js')
 const messageUtils = require('../util/messageUtils');
 const giveaways = require('../util/GiveawayManager');
 const logger = require('../logger');
-const config = require('../storage/config.json');
+const config = require(`../storage/config.json`)
+const lang = require(`../storage/lang.json`)
 const ms = require('ms');
 
 module.exports.run = (Client, msg, args) => {
+    msg.delete();
     if (!args[0]) {
         return messageUtils.sendSyntaxError(msg.channel, this)
     }
@@ -13,24 +15,25 @@ module.exports.run = (Client, msg, args) => {
     const g = giveaways.manager.giveaways.find(g => g.messageID === args[0])
     
     if (!g) {
-        return messageUtils.sendError(msg.channel, this, "Invalid giveaway");
+        return messageUtils.sendError(msg.channel, this, `${lang.gedit.fail.invalid}`);
     }
     
     switch (args[1]) {
         case "winners":
             if (!parseInt(args[2])) {
-                return messageUtils.sendError(msg.channel, this, "Invalid number of winners")
+                return messageUtils.sendError(msg.channel, this, `${lang.gedit.fail.number}`)
             }
             g.edit({
                 newWinnerCount: parseInt(args[2])
             }).then(() => {
                 const embed = new discord.MessageEmbed()
-                .setColor(config.colors.positive)
-                .setTitle("Edited successfully!")
+                .setColor(config.embed.colors.mainColor)
+                .setTitle(`${lang.gedit.success.title}`)
+                .setFooter(config.embed.footer)
                 .setTimestamp();
-                msg.channel.send(embed).then(m => m.delete({timeout: 5000}))
+                msg.channel.send(embed).then(m => m.delete({timeout: 10000}))
             }).catch(err =>{
-                logger.error(`An error occured while rerolling a giveaway ${g.messageID}`)
+                logger.error(`${lang.gedit.success.failed} ${g.messageID}`)
                 logger.error(err)
                 messageUtils.sendError(msg.channel, this, err.message)
             })

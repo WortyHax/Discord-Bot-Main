@@ -3,7 +3,8 @@ const ms = require("ms")
 const db = require("quick.db")
 const config = require("../storage/config.json")
 
-module.exports.run = async(client,message,args)=> {
+module.exports.run = async(client, message, args)=> {
+    message.delete();
 let timeuser = args[0]
 let reason = args.slice(1).join(" ")
 // !remind 10m Dream Code Uploaded video

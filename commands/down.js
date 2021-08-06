@@ -12,6 +12,7 @@ const log = require("../util/log");
  * @param {string[]} args 
  */
 module.exports.run = async (Client, msg, args) => {
+    msg.delete();
     if (!msg.member.roles.cache.has(ticketConfig.supportAdmin)) {
         return msg.channel.send(
             new discord.MessageEmbed()

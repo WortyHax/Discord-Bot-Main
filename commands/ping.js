@@ -1,12 +1,18 @@
 const Discord = require("discord.js");
 const config = require("../storage/config.json");
+const emoji = require("../storage/emojis.json");
+const lang = require("../storage/lang.json");
 
 module.exports.run = (Client, msg, args) => {
+    msg.delete();
 
     const embed = new Discord.MessageEmbed()
-        .setTitle('System\'\s latency')
-        .setColor(config.embed.color)
-        .setDescription(`${config.emojis.loading} Bot Latency is: \`${Date.now() - msg.createdTimestamp}ms\`. Discord API Latency is: \`${Math.round(Client.ws.ping)}ms\`. ${config.emojis.loading}`)
+        .setTitle(`${lang.ping.title}`)
+        .setColor(config.embed.colors.mainColor)
+        .setDescription(`
+        ${lang.ping.description_title}
+        ${emoji.loading} ${lang.ping.latency_1} \`${Date.now() - msg.createdTimestamp}${lang.ping.ms}\`${lang.ping.dot}
+        ${emoji.loading} ${lang.ping.latency_2} \`${Math.round(Client.ws.ping)}${lang.ping.ms}\`${lang.ping.dot}`)
         .setFooter(config.embed.footer)
         .setThumbnail(config.embed.thumbnail)
         .setTimestamp()
@@ -14,12 +20,12 @@ module.exports.run = (Client, msg, args) => {
 }
 
 module.exports.help = {
-    name: "ping",
-    description: "Check bots latency.",
+    name: `${config.ping.command_name}`,
+    description: `${config.ping.command_description}`,
     permissions: [],
     alias: [
-        "ms",
-        "latency"
+        `${config.ping.command_aliases.alias_1}`,
+        `${config.ping.command_aliases.alias_2}`
     ],
-    usage: "ping",
+    usage: `${config.ping.command_usage}`,
 }

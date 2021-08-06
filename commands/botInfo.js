@@ -5,8 +5,10 @@ const os = require('os');
 const ms = require('ms');
 const moment = require("moment");
 const config = require("../storage/config.json");
+const lang = require("../storage/lang.json");
 
 module.exports.run = (Client, msg, args) => {
+    msg.delete();
 
     // Format Uptime (DD:HH:MM:SS) //
     function format(seconds){
@@ -53,46 +55,48 @@ module.exports.run = (Client, msg, args) => {
 
         const core = os.cpus()[0];
         const embed = new Discord.MessageEmbed()
-            .setTitle('System Information')
+            .setTitle(`${lang.botInfo.title}`)
 			.setThumbnail(config.embed.thumbnail)
-			.setColor(config.embed.color)
+			.setColor(config.embed.colors.mainColor)
             .setDescription(`
-            **General:**
-            ➥ Bot Name: \`${Client.user.tag}\`
-            ➥ Commands: \`${Client.commands.size}\`
-            ➥ Member Count: \`${Client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}\`
-            ➥ Channels: \`${Client.channels.cache.size.toLocaleString()}\`
-            ➥ Server Creation Date: \`${moment(msg.guild.createdTimestamp).format('LT')} ${moment(msg.guild.createdTimestamp).format('LL')} ${moment(msg.guild.createdTimestamp).fromNow()}\`
-            ➥ Creation Date: \`${utc(Client.user.createdTimestamp).format('Do MMMM YYYY HH:mm:ss')}\`
-            ➥ NodeJS Version: \`${process.version}\`
-            ➥ Version: \`v${version}\`\n
-            **System:**
-            ➥ Platform: \`${process.platform}\`
-            ➥ Uptime: \`${format(uptime)} DD:HH:MM:SS\`
-            ➥ CPU:
-            \u3000 Cores: \`${os.cpus().length}\`
-            \u3000 Model: \`${core.model}\`
-            \u3000 Speed: \`${core.speed}MHz\`\n
-            ➥ RAM:
-            \u3000 Total Memory:
-            \u3000 \u3000 GB: \`${total_mem_in_gb}GB\`
-            \u3000 \u3000 MB: \`${total_mem_in_mb}MB\`
-            \u3000 \u3000 KB: \`${total_mem_in_kb}KB\`\n
-            \u3000 Free Memory:
-            \u3000 \u3000 GB: \`${free_mem_in_gb}GB\`
-            \u3000 \u3000 MB: \`${free_mem_in_mb}MB\`
-            \u3000 \u3000 KB: \`${free_mem_in_kb}KB\``)
+            ${lang.botInfo.general.title}
+            ${lang.botInfo.separators} ${lang.botInfo.general.bot_name} \`${Client.user.tag}\`
+            ${lang.botInfo.separators} ${lang.botInfo.general.commands} \`${Client.commands.size}\`
+            ${lang.botInfo.separators} ${lang.botInfo.general.memberCount} \`${Client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}\`
+            ${lang.botInfo.separators} ${lang.botInfo.general.channels} \`${Client.channels.cache.size.toLocaleString()}\`
+            ${lang.botInfo.separators} ${lang.botInfo.general.server_creationDate} \`${moment(msg.guild.createdTimestamp).format('LT')} ${moment(msg.guild.createdTimestamp).format('LL')} ${moment(msg.guild.createdTimestamp).fromNow()}\`
+            ${lang.botInfo.separators} ${lang.botInfo.general.bot_creationDate} \`${utc(Client.user.createdTimestamp).format('Do MMMM YYYY HH:mm:ss')}\`
+            ${lang.botInfo.separators} ${lang.botInfo.general.nodeJS} \`${process.version}\`
+            ${lang.botInfo.separators} ${lang.botInfo.general.botVersion_1} \`${lang.botInfo.general.botVersion_2}${version}\`\n
+            ${lang.botInfo.system.title}
+            ${lang.botInfo.separators} ${lang.botInfo.system.platform} \`${process.platform}\`
+            ${lang.botInfo.separators} ${lang.botInfo.system.uptime_1} \`${format(uptime)} ${lang.botInfo.system.uptime_2}\`
+            ${lang.botInfo.separators} ${lang.botInfo.system.cpu_1}
+            \u3000 ${lang.botInfo.system.cpu_2} \`${os.cpus().length}\`
+            \u3000 ${lang.botInfo.system.cpu_3} \`${core.model}\`
+            \u3000 ${lang.botInfo.system.cpu_4} \`${core.speed}${lang.botInfo.system.cpu_5}\`\n
+            ${lang.botInfo.separators} ${lang.botInfo.system.ram}
+            \u3000 ${lang.botInfo.system.totalMemory}
+            \u3000 \u3000 ${lang.botInfo.system.gb}${lang.botInfo.system.colon} \`${total_mem_in_gb}${lang.botInfo.system.gb}\`
+            \u3000 \u3000 ${lang.botInfo.system.mb}${lang.botInfo.system.colon} \`${total_mem_in_mb}${lang.botInfo.system.mb}\`
+            \u3000 \u3000 ${lang.botInfo.system.kb}${lang.botInfo.system.colon} \`${total_mem_in_kb}${lang.botInfo.system.kb}\`\n
+            \u3000 ${lang.botInfo.system.freeMemory}
+            \u3000 \u3000 ${lang.botInfo.system.gb}${lang.botInfo.system.colon} \`${free_mem_in_gb}${lang.botInfo.system.gb}\`
+            \u3000 \u3000 ${lang.botInfo.system.mb}${lang.botInfo.system.colon} \`${free_mem_in_mb}${lang.botInfo.system.mb}\`
+            \u3000 \u3000 ${lang.botInfo.system.kb}${lang.botInfo.system.colon} \`${free_mem_in_kb}${lang.botInfo.system.kb}\``)
             .setFooter(config.embed.footer)
 			.setTimestamp();
             msg.channel.send(embed)
 };
 
 module.exports.help = {
-    name: "botInfo",
-    description: "Get some bot information.",
+    name: `${config.botInfo.command_name}`,
+    description: `${config.botInfo.command_description}`,
     permissions: [],
     alias: [
-        "botinfo"
+        `${config.botInfo.command_aliases.alias_1}`,
+        `${config.botInfo.command_aliases.alias_2}`,
+        `${config.botInfo.command_aliases.alias_3}`
     ],
-    usage: "botInfo",
+    usage: `${config.botInfo.command_usage}`,
 }

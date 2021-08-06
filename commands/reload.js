@@ -1,49 +1,41 @@
 const Discord = require("discord.js");
 const config = require("../storage/config.json");
-
+const emoji = require("../storage/emojis.json");
+const lang = require("../storage/lang.json");
 
 module.exports.run = async (bot, message, args) => {
-
-    const bot_owner = new Discord.MessageEmbed()
-        .setTitle(config.embed.title)
-        .setColor(config.embed.color)
-        .setDescription(`Sorry, but you don't have permission to do that! ${config.emojis.error}`)
-        .setThumbnail(config.embed.thumbnail)
-        .setFooter(config.embed.footer)
-        .setTimestamp()
+    message.delete();
 
     const command = new Discord.MessageEmbed()
-        .setTitle(config.embed.title)
-        .setColor(config.embed.color)
-        .setDescription(`Please enter a valid command! ${config.emojis.error}`)
+        .setTitle(`${lang.reload.error.not_a_valid_command.command_title}`)
+        .setColor(config.embed.colors.mainColor)
+        .setDescription(`${lang.reload.error.not_a_valid_command.command_description} ${emoji.error}`)
         .setThumbnail(config.embed.thumbnail)
-        .setFooter(config.embed.footer)
+        .setFooter(`${lang.reload.error.not_a_valid_command.command_footer} ${message.author.username}`, message.author.avatarURL({ dynamic: true }))
         .setTimestamp()
 
+    if(!args[0]) return message.channel.send(command)
+
     const error = new Discord.MessageEmbed()
-        .setTitle(config.embed.title)
-        .setColor(config.embed.color)
-        .setDescription(`Could not reload command: \`${args[0].toLowerCase()}\` ${config.emojis.error}`)
+        .setTitle(`${lang.reload.error.error.error_title}`)
+        .setColor(config.embed.colors.mainColor)
+        .setDescription(`${lang.reload.error.error.error_description} \`${args[0].toLowerCase()}\` ${emoji.error}`)
         .setThumbnail(config.embed.thumbnail)
-        .setFooter(config.embed.footer)
+        .setFooter(`${lang.reload.error.error.error_footer} ${message.author.username}`, message.author.avatarURL({ dynamic: true }))
         .setTimestamp()
 
     const success = new Discord.MessageEmbed()
-        .setTitle(config.embed.title)
-        .setColor(config.embed.color)
-        .setDescription(`Successfully reloaded \`${args[0].toLowerCase()}\` command! ${config.emojis.success}`)
+        .setTitle(`${lang.reload.success.success_title}`)
+        .setColor(config.embed.colors.mainColor)
+        .setDescription(`${lang.reload.success.success_description_1} \`${args[0].toLowerCase()}\` ${lang.reload.success.success_description_2} ${emoji.success}`)
         .setThumbnail(config.embed.thumbnail)
-        .setFooter(config.embed.footer)
+        .setFooter(`${lang.reload.success.success_footer} ${message.author.username}`, message.author.avatarURL({ dynamic: true }))
         .setTimestamp()
-
-    if(message.author.id != config.settings.botOwner) return message.channel.send(bot_owner)
-
-    if(!args[0]) return message.channel.send(command)
 
     let commandName = args[0].toLowerCase()
 
     try {
-        delete require.cache[require.resolve(`./${commandName}.js`)] // usage !reload <name>
+        delete require.cache[require.resolve(`./${commandName}.js`)]
         bot.commands.delete(commandName)
         const pull = require(`./${commandName}.js`)
         bot.commands.set(commandName, pull)
@@ -56,9 +48,18 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "reload",
-    description: "Reload a command.",
-    permissions: [],
-    alias: [],
-    usage: "reload <command>",
+    name: `${config.reload.command_name}`,
+    description: `${config.reload.command_description}`,
+    permissions: [
+        `${config.reload.command_permissions.permission_1}`,
+        `${config.reload.command_permissions.permission_2}`,
+        `${config.reload.command_permissions.permission_3}`,
+        `${config.reload.command_permissions.permission_4}`,
+        `${config.reload.command_permissions.permission_5}`
+    ],
+    alias: [
+            `${config.reload.command_aliases.alias_1}`,
+            `${config.reload.command_aliases.alias_2}`
+    ],
+    usage: `${config.reload.command_usage}`,
 }

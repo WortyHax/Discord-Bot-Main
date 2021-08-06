@@ -71,14 +71,14 @@ const sanctionRevoker = new cron(
             sanctions.forEach(sanction => {
                 Client.guilds.fetch(sanction.guild).then(g => {
                     if (sanction.type == sanctionTypes.TEMPMUTE) {
-                        g.member(sanction.user).roles.remove(config.mutedRole)
+                        g.member(sanction.user).roles.remove(config.roles.muted)
                             .catch(logger.error.bind(logger.error));
                         sanction.update({
                             revoked: true
                         }).catch(logger.error.bind(logger.error));
                     } else if (sanction.type == sanctionTypes.TEMPBAN) {
                         g.fetchBans().then(bans => {
-                            if (bans.find(ban => ban.user.id == sanction.user)) return; 
+                            if (bans.find(sanction.user)) return; 
                             g.members.unban(sanction.user).catch(logger.error.bind(logger.error));
                         })
                     }

@@ -8,6 +8,7 @@ const config = require('../storage/config.json');
  * @param {string[]} args 
  */
 module.exports.run = (Client, msg, args) => {
+    msg.delete();
     const channel = msg.guild.channels.cache.get(config.channels.staffmovement);
 
     const embed = new discord.MessageEmbed()

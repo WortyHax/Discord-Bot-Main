@@ -1,46 +1,36 @@
 const Discord = require("discord.js");
 const config = require("../storage/config.json");
+const lang = require("../storage/lang.json");
+const emoji = require("../storage/emojis.json");
 
-module.exports.run = (Client, message) => {
+module.exports.run = async (Client, message) => {
+    message.delete();
 
-    const embed = new Discord.MessageEmbed()
-        .setTitle('System is restarting')
-        .setColor(config.embed.color)
-        .setDescription(`Restarting ${config.emojis.loading}`)
-        .setThumbnail(config.embed.thumbnail)
-        .setFooter(config.embed.footer)
-        .setTimestamp()
+    const restarting = new Discord.MessageEmbed()
+    .setTitle(`${lang.restart.success.success_title}`)
+    .setColor(config.embed.colors.mainColor)
+    .setDescription(`<@${message.author.id}> ${lang.restart.success.success_description}`)
+    .setThumbnail(config.embed.thumbnail)
+    .setFooter(`${lang.restart.success.success_footer}`, message.author.avatarURL({ dynamic: true }))
+    .setTimestamp()
 
-    const error = new Discord.MessageEmbed()
-        .setTitle(config.embed.title)
-        .setColor(config.embed.color)
-        .setDescription(`Sorry, but you don't have permission to do that! ${config.emojis.error}`)
-        .setThumbnail(config.embed.thumbnail)
-        .setFooter(config.embed.footer)
-        .setTimestamp()
-    
-    const success = new Discord.MessageEmbed()
-        .setTitle(config.embed.title)
-        .setColor(config.embed.color)
-        .setDescription(`Successfully restarted bot! ${config.emojis.success}`)
-        .setThumbnail(config.embed.thumbnail)
-        .setFooter(config.embed.footer)
-        .setTimestamp()
-
-if (message.author.id !== config.settings.botOwner) return message.channel.send(error);
-    message.channel.send(embed)
-    .then(() => Client.destroy())
-    .then(() => Client.login(config.token))
-    .then(() => message.channel.send(success))
-    console.log('Bot restarted!')
-};
+    await message.channel.send(restarting)
+    process.exit();
+}
 
 module.exports.help = {
-    name: "restart",
-    description: "Restart bot.",
-    permissions: [],
-    alias: [
-        "reset"
+    name: `${config.restart.command_name}`,
+    description: `${config.restart.command_description}`,
+    permissions: [
+        `${config.restart.command_permissions.permission_1}`,
+        `${config.restart.command_permissions.permission_2}`,
+        `${config.restart.command_permissions.permission_3}`,
+        `${config.restart.command_permissions.permission_4}`,
+        `${config.restart.command_permissions.permission_5}`
     ],
-    usage: "restart",
+    alias: [
+            `${config.restart.command_aliases.alias_1}`,
+            `${config.restart.command_aliases.alias_2}`
+    ],
+    usage: `${config.restart.command_usage}`,
 }

@@ -10,6 +10,7 @@ const messageUtils = require('../util/messageUtils');
  * @param {string[]} args 
  */
 module.exports.run = (Client, msg, args) => {
+    msg.delete();
     msg.channel.createOverwrite(msg.guild.roles.everyone, {
         SEND_MESSAGES: null
     }).then(_ch => {

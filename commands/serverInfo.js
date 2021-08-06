@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
 const config = require("../storage/config.json");
+const lang = require("../storage/lang.json");
+const emoji = require("../storage/emojis.json");
 const pagination = require('discord.js-pagination');
 const moment = require('moment');
 
@@ -33,7 +35,8 @@ const regions = {
 	'us-south': 'US South'
 };
 
-module.exports.run = (Client, message, args) => {
+module.exports.run = async (Client, message, args, bot) => {
+    message.delete();
 
     const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
     const members = message.guild.members.cache;
@@ -43,51 +46,50 @@ module.exports.run = (Client, message, args) => {
             .sort((a, b) => b.position - a.position)
             .map(r => r)
             .join("\n");
-            if (rolemap.length > 1024) rolemap = "To many roles to display";
-            if (!rolemap) rolemap = "No roles";
+            if (rolemap.length > 1024) rolemap = `${lang.serverInfo.roles.to_many_roles}`;
+            if (!rolemap) rolemap = `${lang.serverInfo.roles.no_roles}`;
 
     const embed = new Discord.MessageEmbed()
-        .setAuthor(`Server Information`, message.guild.iconURL({ dynamic: true }))
-        .setColor(config.embed.color)
+        .setAuthor(`${lang.serverInfo.serverInfo_panel.author}`, message.guild.iconURL({ dynamic: true }))
+        .setColor(config.embed.colors.mainColor)
         .setThumbnail(message.guild.iconURL({ dynamic: true }))
         .setDescription(`
-        **General:**
-        ➥ Guild Name: \`${message.guild.name}\`
-        ➥ Guild ID: \`${message.guild.id}\`
-        ➥ Guild Owner:
-        \u3000\u3000Tag: \`${message.guild.owner.user.tag}\`
-        \u3000\u3000ID: \`${message.guild.ownerID}\`
-        ➥ Region: \`${regions[message.guild.region]}\`
-        ➥ Boost Tier: \`${message.guild.premiumTier ? `Tier ${message.guild.premiumTier}` : 'None'}\`
-        ➥ Explicit Filter: \`${filterLevels[message.guild.explicitContentFilter]}\`
-        ➥ Verification Level: \`${verificationLevels[message.guild.verificationLevel]}\`
-        ➥ Time Created: \`${moment(message.guild.createdTimestamp).format('LT')} ${moment(message.guild.createdTimestamp).format('LL')} ${moment(message.guild.createdTimestamp).fromNow()}\`\n
-        **Statistics:**
-        ➥ Role Count: \`${roles.length}\`
-        ➥ Emoji:
-        \u3000\u3000Total Emojis: \`${emojis.size}\`
-        \u3000\u3000Regular Emoji Count: \`${emojis.filter(emoji => !emoji.animated).size}\`
-        \u3000\u3000Animated Emoji Count: \`${emojis.filter(emoji => emoji.animated).size}\`
-        ➥ Member Count: 
-        \u3000\u3000Total Members: \`${message.guild.memberCount}\`
-        \u3000\u3000Humans: \`${members.filter(member => !member.user.bot).size}\`
-        \u3000\u3000Bots: \`${members.filter(member => member.user.bot).size}\`
-        ➥ Channels:
-        \u3000\u3000Text Channels: \`${channels.filter(channel => channel.type === 'text').size}\`
-        \u3000\u3000Voice Channels: \`${channels.filter(channel => channel.type === 'voice').size}\`
-        ➥ Boost Count: \`${message.guild.premiumSubscriptionCount || '0'}\`\n
-        **Presence:**
-        \u3000\u3000➥ Online: \`${members.filter(member => member.presence.status === 'online').size}\`
-        \u3000\u3000➥ Idle: \`${members.filter(member => member.presence.status === 'idle').size}\`
-        \u3000\u3000➥ Do Not Disturb: \`${members.filter(member => member.presence.status === 'dnd').size}\`
-        \u3000\u3000➥ Offline: \`${members.filter(member => member.presence.status === 'offline').size}\``)
+        ${lang.serverInfo.serverInfo_panel.general.title}
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.general.name} \`${message.guild.name}\`
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.general.id} \`${message.guild.id}\`
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.general.owner_1}
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.general.owner_2} \`${message.guild.owner.user.tag}\`
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.general.owner_3} \`${message.guild.ownerID}\`
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.general.region} \`${regions[message.guild.region]}\`
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.general.boost_tier_1} \`${message.guild.premiumTier ? `${lang.serverInfo.serverInfo_panel.general.boost_tier_2} ${message.guild.premiumTier}` : `${lang.serverInfo.serverInfo_panel.general.boost_tier_3}`}\`
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.general.explict_filter} \`${filterLevels[message.guild.explicitContentFilter]}\`
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.general.verification_level} \`${verificationLevels[message.guild.verificationLevel]}\`
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.general.time_created} \`${moment(message.guild.createdTimestamp).format('LT')} ${moment(message.guild.createdTimestamp).format('LL')} ${moment(message.guild.createdTimestamp).fromNow()}\`\n
+        ${lang.serverInfo.serverInfo_panel.statistics.title}
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.statistics.role_count} \`${roles.length}\`
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.statistics.emoji_1}
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.statistics.emoji_2} \`${emojis.size}\`
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.statistics.emoji_3} \`${emojis.filter(emoji => !emoji.animated).size}\`
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.statistics.emoji_4} \`${emojis.filter(emoji => emoji.animated).size}\`
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.statistics.memberCount_1} 
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.statistics.memberCount_2} \`${message.guild.memberCount}\`
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.statistics.memberCount_3} \`${members.filter(member => !member.user.bot).size}\`
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.statistics.memberCount_4} \`${members.filter(member => member.user.bot).size}\`
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.statistics.channels_1}
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.statistics.channels_2} \`${channels.filter(channel => channel.type === 'text').size}\`
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.statistics.channels_3} \`${channels.filter(channel => channel.type === 'voice').size}\`
+        ${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.statistics.boost_count_1} \`${message.guild.premiumSubscriptionCount || `${lang.serverInfo.serverInfo_panel.statistics.boost_count_2}`}\`\n
+        ${lang.serverInfo.serverInfo_panel.presence.title}
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.presence.presence_1} \`${members.filter(member => member.presence.status === 'online').size}\`
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.presence.presence_2} \`${members.filter(member => member.presence.status === 'idle').size}\`
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.presence.presence_3} \`${members.filter(member => member.presence.status === 'dnd').size}\`
+        \u3000\u3000${lang.serverInfo.serverInfo_panel.separators} ${lang.serverInfo.serverInfo_panel.presence.presence_4} \`${members.filter(member => member.presence.status === 'offline').size}\``)
         .setTimestamp();
     const embed2 = new Discord.MessageEmbed()
-    .setAuthor(`Role List [${roles.length - 1} roles]`, message.guild.iconURL({ dynamic: true }))
-    .setColor(config.embed.color)
+    .setAuthor(`${lang.serverInfo.serverInfo_panel.roles.author_1} ${lang.serverInfo.serverInfo_panel.roles.author_2}${roles.length - 1} ${lang.serverInfo.serverInfo_panel.roles.author_3}`, message.guild.iconURL({ dynamic: true }))
+    .setColor(config.embed.colors.mainColor)
     .setDescription(`
-    \u200b
-    **Roles:**
+    ${lang.serverInfo.serverInfo_panel.roles.title}
     ${rolemap}`)
     .setTimestamp();
 
@@ -106,11 +108,15 @@ module.exports.run = (Client, message, args) => {
 };
 
 module.exports.help = {
-    name: "serverinfo",
-    description: "Get some server information.",
+    name: `${config.serverInfo.command_name}`,
+    description: `${config.serverInfo.command_description}`,
     permissions: [],
     alias: [
-        "serverinfo"
+        `${config.serverInfo.command_aliases.alias_1}`,
+        `${config.serverInfo.command_aliases.alias_2}`,
+        `${config.serverInfo.command_aliases.alias_3}`,
+        `${config.serverInfo.command_aliases.alias_4}`,
+        `${config.serverInfo.command_aliases.alias_5}`
     ],
-    usage: "serverInfo",
+    usage: `${config.serverInfo.command_usage}`,
 }

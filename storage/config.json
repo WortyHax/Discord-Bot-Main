@@ -1,42 +1,46 @@
 {
     "settings": {
-        "token": "ODM4MTg2MTIwNzMwMzc4Mjgw.YI3bpw.2ni8j1cgJzv7RqjLJp0km2vLGmc",
-        "botOwner": "310772257695989761",
+        "token": "ODYxNTcyOTE2NDYxMzA1ODc2.YOLwTg.n2GTMdr_P-bzMHgeSozlxv02OfE",
         "prefix": "."
     },
     "channels": {
-        "welcomeMessages": "",
-        "leaveMessages": "",
-        "announcements": "",
+        "welcomeMessages": "836318617841696808",
+        "leaveMessages": "836318617841696808",
+        "announcements": "836316196482580490",
         "updates": "",
         "staffMovement": "",
         "polls": "836316911934373929",
         "pendingSuggestions": "836318724180934746",
         "acceptedSuggestions": "838183748989878292",
         "deniedSuggestions": "838183768845975572",
-        "pendingBugreports": "838183922671026177",
-        "acceptedBugreports": "838183937255145482",
+        "pendingBugReports": "838183922671026177",
+        "acceptedBugReports": "838183937255145482",
         "deniedBugReports": "838183947237457940"
     },
     "embed": {
-        "systemTitle": "Tropic System",
-        "title": "Tropic Team",
+        "systemTitle": "Coral System",
+        "title": "Coral Services",
         "title_url": "https://mc-market.org/",
-        "author": "Tropic Team",
+        "author": "Coral Services",
         "author_url": "https://mc-market.org/",
         "thumbnail": "https://imgur.com/8utR5ug.png",
-        "footer": "Tropic Team",
+        "footer": "Coral Services",
         "colors": {
             "mainColor": "#2F3136",
-            "positive": "#2F3136",
-            "negative": "#2F3136"
+            "positive": "#00ff00",
+            "negative": "#FF0000"
         }
     },
     "roles": {
-        "newMember": "",
+        "newMember": [
+            "835645778361581598"
+        ],
         "muted": "838184976461463641"
     },
     "logs": {
+        "logs": {
+            "moderation": "861576050458099712"
+        },
         "suggestion": {
             "suggestion_pending": "845341678926692362",
             "suggestion_accepted": "845341678926692362",
@@ -48,11 +52,94 @@
             "bugreport_denied": "845422887653343242"
         }
     },
+    "avatar": {
+        "settings": {
+            "command_name": "avatar",
+            "command_description": "Get the avatar of yourself or a user.",
+            "command_usage": "avatar [user]",
+            "command_aliases": {
+                "alias_1": "av"
+            }
+        }
+    },
+    "invite_tracker": {
+        "invite_check": {
+            "command_name": "invites",
+            "command_description": "Get the invite count of yourself or a user.",
+            "command_usage": "invites [user]",
+            "command_aliases": {
+                "alias_1": "invs",
+                "alias_2": "invite"
+            }
+        },
+        "invite_top": {
+            "command_name": "inviteTop",
+            "command_description": "Show top 10 inviters.",
+            "command_usage": "inviteTop",
+            "command_aliases": {
+                "alias_1": "invitetop",
+                "alias_2": "inviteboard",
+                "alias_3": "inviteleaderboard",
+                "alias_4": "invtop",
+                "alias_5": "invTop"
+            }
+        }
+    },
     "suggestion": {
+        "settings": {
+            "suggest": {
+                "command_name": "suggest",
+                "command_description": "Create a suggestion.",
+                "command_usage": "suggest <topic> <suggestion>",
+                "command_aliases": {
+                    "alias_1": "suggestion",
+                    "alias_2": "addSuggestion",
+                    "alias_3": "addsuggestion"
+                }
+            },
+            "acceptSuggestion": {
+                "command_name": "acceptSuggestion",
+                "command_description": "Accept a suggestion.",
+                "command_usage": "acceptSuggestion <suggestionId> [reason]",
+                "command_permissions": {
+                    "permission_1": "MANAGE_GUILD",
+                    "permission_2": "",
+                    "permission_3": "",
+                    "permission_4": "",
+                    "permission_5": ""
+                },
+                "command_aliases": {
+                    "alias_1": "asuggestion",
+                    "alias_2": "aSuggestion",
+                    "alias_3": "acceptsuggestion",
+                    "alias_4": "aSuggest",
+                    "alias_5": "asuggest"
+                }
+            },
+            "denySuggestion": {
+                "command_name": "denySuggestion",
+                "command_description": "Deny a suggestion.",
+                "command_usage": "denySuggestion <suggestionId> [reason]",
+                "command_permissions": {
+                    "permission_1": "MANAGE_GUILD",
+                    "permission_2": "",
+                    "permission_3": "",
+                    "permission_4": "",
+                    "permission_5": ""
+                },
+                "command_aliases": {
+                    "alias_1": "dsuggestion",
+                    "alias_2": "dSuggestion",
+                    "alias_3": "denysuggestion",
+                    "alias_4": "dSuggest",
+                    "alias_5": "dsuggest"
+                }
+            }
+        },
         "colors": {
             "pending": "#2F3136",
-            "accepted": "#2F3136",
-            "denied": "#2F3136"
+            "accepted": "#00ff00",
+            "denied": "#FF0000"
         },
         "pending": {
             "thumbnail": "https://imgur.com/eO1QUX2.png"
@@ -74,12 +161,60 @@
             "topic_8": [],
             "topic_9": [],
             "topic_10": []
-        },
+        }
+    },
     "bugreport": {
+        "settings": {
+            "bugReport": {
+                "command_name": "bugreport",
+                "command_description": "Create a bugreport.",
+                "command_usage": "bugreport <topic> <report>",
+                "command_aliases": {
+                    "alias_1": "bug",
+                    "alias_2": "br" 
+                }
+            },
+            "acceptBugReport": {
+                "command_name": "acceptBugReport",
+                "command_description": "Accept a bugreport.",
+                "command_usage": "acceptBugReport <bugreportID> [reason]",
+                "command_permissions": {
+                    "permission_1": "MANAGE_GUILD",
+                    "permission_2": "",
+                    "permission_3": "",
+                    "permission_4": "",
+                    "permission_5": ""
+                },
+                "command_aliases": {
+                    "alias_1": "acceptBug",
+                    "alias_2": "acceptbug",
+                    "alias_3": "acceptBr",
+                    "alias_4": "acceptbr"
+                }
+            },
+            "denyBugReport": {
+                "command_name": "denytBugReport",
+                "command_description": "Deny a bugreport.",
+                "command_usage": "denyBugReport <bugreportID> [reason]",
+                "command_permissions": {
+                    "permission_1": "MANAGE_GUILD",
+                    "permission_2": "",
+                    "permission_3": "",
+                    "permission_4": "",
+                    "permission_5": ""
+                },
+                "command_aliases": {
+                    "alias_1": "denyBug",
+                    "alias_2": "denybug",
+                    "alias_3": "denyBr",
+                    "alias_4": "denybr"
+                }
+            }
+        },
         "colors": {
             "pending": "#2F3136",
-            "accepted": "#2F3136",
-            "denied": "#2F3136"
+            "accepted": "#00ff00",
+            "denied": "#FF0000"
         },
         "pending": {
             "thumbnail": "https://imgur.com/eO1QUX2.png"
@@ -104,7 +239,261 @@
         },
         "ticket": {
             "": ""
-            }
+        }
+    },
+    "reload": {
+        "command_name": "reload",
+        "command_description": "Reload a command.",
+        "command_usage": "reload <fileName>",
+        "command_permissions": {
+            "permission_1": "ADMINISTRATOR",
+            "permission_2": "",
+            "permission_3": "",
+            "permission_4": "",
+            "permission_5": ""
+        },
+        "command_aliases": {
+            "alias_1": "rl",
+            "alias_2": "load"
+        }
+    },
+    "restart": {
+        "command_name": "restart",
+        "command_description": "Restart the bot.",
+        "command_usage": "restart",
+        "command_permissions": {
+            "permission_1": "ADMINISTRATOR",
+            "permission_2": "",
+            "permission_3": "",
+            "permission_4": "",
+            "permission_5": ""
+        },
+        "command_aliases": {
+            "alias_1": "reset",
+            "alias_2": "refresh"
+        }
+    },
+    "shutdown": {
+        "command_name": "shutdown",
+        "command_description": "Shutdown the bot.",
+        "command_usage": "shutdown",
+        "command_permissions": {
+            "permission_1": "ADMINISTRATOR",
+            "permission_2": "",
+            "permission_3": "",
+            "permission_4": "",
+            "permission_5": ""
+        },
+        "command_aliases": {
+            "alias_1": "stop",
+            "alias_2": "kill",
+            "alias_3": "forcestop"
+        }
+    },
+    "help": {
+        "command_name": "help",
+        "command_description": "Get a list of commands.",
+        "command_usage": "help <command>",
+        "command_aliases": {
+            "alias_1": "support"
+        }
+    },
+    "memberCount": {
+        "command_name": "memberCount",
+        "command_description": "Get memberCount of the guild.",
+        "command_usage": "memberCount",
+        "command_aliases": {
+            "alias_1": "membercount",
+            "alias_2": "members",
+            "alias_3": "humans",
+            "alias_4": "people",
+            "alias_5": "online"
+        }
+    },
+    "serverInfo": {
+        "command_name": "serverInfo",
+        "command_description": "Get some server information.",
+        "command_usage": "serverInfo",
+        "command_aliases": {
+            "alias_1": "serverinfo",
+            "alias_2": "server",
+            "alias_3": "info",
+            "alias_4": "serverInformation",
+            "alias_5": "serverinformation"
+        }
+    },
+    "ping": {
+        "command_name": "ping",
+        "command_description": "Get bot and api latency.",
+        "command_usage": "ping",
+        "command_aliases": {
+            "alias_1": "ms",
+            "alias_2": "latency"
+        }
+    },
+    "botInfo": {
+        "command_name": "botInfo",
+        "command_description": "Get some bot information.",
+        "command_usage": "botInfo",
+        "command_aliases": {
+            "alias_1": "botinfo",
+            "alias_2": "botInformation",
+            "alias_3": "botinformation"
+        }
+    },
+    "poll": {
+        "command_name": "poll",
+        "command_description": "Create a poll.",
+        "command_usage": "poll <\"Title\">",
+        "command_aliases": {
+            "alias_1": "Poll",
+            "alias_2": "pollCreator",
+            "alias_3": "pollcreator",
+            "alias_4": "polls"
+        }
+    },
+    "purge": {
+        "command_name": "purge",
+        "command_description": "Clear messages.",
+        "command_usage": "purge <amount>",
+        "command_permissions": {
+            "permission_1": "MANAGE_MESSAGES",
+            "permission_2": "",
+            "permission_3": "",
+            "permission_4": "",
+            "permission_5": ""
+        },
+        "command_aliases": {
+            "alias_1": "clear",
+            "alias_2": "clearMessages",
+            "alias_3": "clearmessages",
+            "alias_4": "clean",
+            "alias_5": "removeMessages"
+        }
+    },
+    "kick": {
+        "command_name": "kick",
+        "command_description": "Kick someone from this server.",
+        "command_usage": "kick <@user> <reason>",
+        "command_permissions": {
+            "permission_1": "KICK_MEMBERS",
+            "permission_2": "",
+            "permission_3": "",
+            "permission_4": "",
+            "permission_5": ""
+        },
+        "command_aliases": {
+            "alias_1": "Kick",
+            "alias_2": "removeUser",
+            "alias_3": "removeuser"
+        }
+    },
+    "mute": {
+        "command_name": "mute",
+        "command_description": "Permanently mute someone from this server.",
+        "command_usage": "mute <@user> [reason]",
+        "command_permissions": {
+            "permission_1": "KICK_MEMBERS",
+            "permission_2": "",
+            "permission_3": "",
+            "permission_4": "",
+            "permission_5": ""
+        },
+        "command_aliases": {
+            "alias_1": "Mute",
+            "alias_2": "addMute",
+            "alias_3": "addmute"
+        }
+    },
+    "tempmute": {
+        "command_name": "tempmute",
+        "command_description": "Tempmute someone from this server.",
+        "command_usage": "tempmute <@user> <duration> [reason]",
+        "command_permissions": {
+            "permission_1": "KICK_MEMBERS",
+            "permission_2": "",
+            "permission_3": "",
+            "permission_4": "",
+            "permission_5": ""
+        },
+        "command_aliases": {
+            "alias_1": "tempMute",
+            "alias_2": "temporaryMute",
+            "alias_3": "temporarymute"
+        }
+    },
+    "unmute": {
+        "command_name": "unmute",
+        "command_description": "Unmute someone from this server.",
+        "command_usage": "unmute <@user> [reason]",
+        "command_permissions": {
+            "permission_1": "KICK_MEMBERS",
+            "permission_2": "",
+            "permission_3": "",
+            "permission_4": "",
+            "permission_5": ""
+        },
+        "command_aliases": {
+            "alias_1": "Unmute",
+            "alias_2": "removeMute",
+            "alias_3": "removemute"
+        }
+    },
+    "ban": {
+        "command_name": "ban",
+        "command_description": "Ban a member.",
+        "command_usage": "ban <@user> <reason>",
+        "command_permissions": {
+            "permission_1": "BAN_MEMBERS",
+            "permission_2": "",
+            "permission_3": "",
+            "permission_4": "",
+            "permission_5": ""
+        }
+    },
+    "unban": {
+        "command_name": "unban",
+        "command_description": "Unban a member.",
+        "command_usage": "unban <userID> <reason>",
+        "command_permissions": {
+            "permission_1": "BAN_MEMBERS",
+            "permission_2": "",
+            "permission_3": "",
+            "permission_4": "",
+            "permission_5": ""
+        },
+        "command_aliases": {
+            "alias_1": "removeBan",
+            "alias_2": "removeban"
+        }
+    },
+    "emojis": {
+        "command_name": "emojis",
+        "command_description": "Shows all emojis in this guild.",
+        "command_usage": "emojis",
+        "command_aliases": {
+            "alias_1": "emoji",
+            "alias_2": "emojisCount",
+            "alias_3": "emojiscount",
+            "alias_4": "emojiCount",
+            "alias_5": "emojicount"
+        }
+    },
+    "announce": {
+        "command_name": "announce",
+        "command_description": "Make an announcement.",
+        "command_usage": "announce <title>",
+        "command_permissions": {
+            "permission_1": "MANAGE_GUILD",
+            "permission_2": "",
+            "permission_3": "",
+            "permission_4": "",
+            "permission_5": ""
+        },
+        "command_aliases": {
+            "alias_1": "announcement",
+            "alias_2": "announcementCreator",
+            "alias_3": "announcementcreator"
         }
     }
 }

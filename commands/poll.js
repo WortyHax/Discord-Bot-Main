@@ -1,5 +1,9 @@
 const Discord = require("discord.js");
-const config = require("../storage/config.json")
+const config = require("../storage/config.json");
+const lang = require("../storage/lang.json");
+const emoji = require("../storage/emojis.json");
+
+const poll = require("./poll");
 
 const options = [
     '🇦',
@@ -43,29 +47,30 @@ const options = [
   }
 
 module.exports.run = (client, message) => {
+  message.delete();
 
-const pollEmbed = client.channels.cache.find(channel => channel.id === config.polls.polls)
+const pollEmbed = client.channels.cache.find(channel => channel.id === config.channels.polls)
 
 const successSingle = new Discord.MessageEmbed()
-.setTitle("Poll Creator")
-.setColor(config.embed.color)
+.setTitle(`${lang.poll.success.single.title}`)
+.setColor(config.embed.colors.mainColor)
 .setFooter(config.embed.footer)
 .setThumbnail(config.embed.thumbnail)
-.setDescription(`${message.author} your poll was successful and was posted in <#836316911934373929>!`)
+.setDescription(`${message.author} ${lang.poll.success.single.description_1} <#${config.channels.polls}>${lang.poll.success.single.description_2}`)
 
 const successMultiple = new Discord.MessageEmbed()
-.setTitle("Poll Creator")
-.setColor(config.embed.color)
+.setTitle(`${lang.poll.success.multiple.title}`)
+.setColor(config.embed.colors.mainColor)
 .setFooter(config.embed.footer)
 .setThumbnail(config.embed.thumbnail)
-.setDescription(`${message.author} your poll was successful and was posted in <#836316911934373929>!`)
+.setDescription(`${message.author} ${lang.poll.success.multiple.description_1} <#${config.channels.polls}>${lang.poll.success.multiple.description_2}`)
 
 const timer = new Discord.MessageEmbed()
-    .setAuthor(`Poll Creator`)
+    .setTitle(`${lang.poll.error.timer.title}`)
     .setThumbnail(config.embed.thumbnail)
     .setFooter(config.embed.footer)
-    .setColor(config.embed.color)
-    .setDescription(`${message.author} please wait before sending another poll.`)
+    .setColor(config.embed.colors.mainColor)
+    .setDescription(`${message.author} ${lang.poll.error.timer.description}`)
 
 let args = message.content.match(/"(.+?)"/g);
     if (args) {
@@ -79,10 +84,10 @@ let args = message.content.match(/"(.+?)"/g);
           lastPoll: Date.now()
         };
 const pollSingle = new Discord.MessageEmbed()
-    .setAuthor(`New poll by ${message.author.tag}`, `${config.embed.thumbnail}`)
+    .setAuthor(`${lang.poll.poll.single.title}`, `${config.embed.thumbnail}`)
     .setThumbnail(config.embed.thumbnail)
-    .setFooter(config.embed.footer)
-    .setColor(config.embed.color)
+    .setFooter(`${lang.poll.poll.single.footer_1} ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
+    .setColor(config.embed.colors.mainColor)
     .setDescription(`
     \u3000
     **${question}**
@@ -91,16 +96,16 @@ const pollSingle = new Discord.MessageEmbed()
         return pollEmbed
           .send(pollSingle)
           .then(async (pollMessage) => {
-            await pollMessage.react(config.emojis.thumbsup);
-            await pollMessage.react(config.emojis.thumbsdown).then(message.channel.send(successSingle));
+            await pollMessage.react(emoji.thumbsup);
+            await pollMessage.react(emoji.thumbsdown).then(message.channel.send(successSingle));
           });
       } else { // multiple choice
 const limit = new Discord.MessageEmbed()
-    .setAuthor(`Poll Creator`)
+    .setTitle(`${lang.poll.error.limit.title}`)
     .setThumbnail(config.embed.thumbnail)
     .setFooter(config.embed.footer)
-    .setColor(config.embed.color)
-    .setDescription(`${message.author} Polls are limited to \`20\` options.`)
+    .setColor(config.embed.colors.mainColor)
+    .setDescription(`${message.author} ${lang.poll.error.limit.description_1} \`${lang.poll.error.limit.description_2}\` ${lang.poll.error.limit.description_3}`)
 
         args = args.map(a => a.replace(/"/g, ''));
         const question = args[0];
@@ -112,15 +117,15 @@ const limit = new Discord.MessageEmbed()
             lastPoll: Date.now()
           };
 const poll = new Discord.MessageEmbed()
-    .setAuthor(`New poll by ${message.author.tag}`, `${config.embed.thumbnail}`)
+    .setAuthor(`${lang.poll.poll.multiple.title}`, `${config.embed.thumbnail}`)
     .setThumbnail(config.embed.thumbnail)
-    .setFooter(config.embed.footer)
-    .setColor(config.embed.color)
+    .setFooter(`${lang.poll.poll.multiple.footer_1} ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
+    .setColor(config.embed.colors.mainColor)
     .setDescription(`
     \u3000
     **${question}**\n
-    ${questionOptions.map((option, i) => `${options[i]} - ${option}`).join('\n')}
-    `)
+    ${questionOptions.map((option, i) => `${options[i]} - ${option}`).join('\n')}\n
+    _(( ${lang.poll.poll.multiple.description} ))_`)
 
           return pollEmbed
             .send(poll)
@@ -134,11 +139,11 @@ const poll = new Discord.MessageEmbed()
       }
     } else {
 const invalidFormat = new Discord.MessageEmbed()
-    .setAuthor(`Poll Creator`)
+    .setTitle(`${lang.poll.error.invalidFormat.title}`)
     .setThumbnail(config.embed.thumbnail)
     .setFooter(config.embed.footer)
-    .setColor(config.embed.color)
-    .setDescription(`${message.author} invalid poll format! Question and options should be wrapped in \`"double quotes."\``)
+    .setColor(config.embed.colors.mainColor)
+    .setDescription(`${message.author} ${lang.poll.error.invalidFormat.description_1} \`"${lang.poll.error.invalidFormat.description_2}"\`\n**${lang.poll.error.invalidFormat.description_3}** ${config.settings.prefix}${poll.help.name} "Title" "Option 1" "Option 2"`)
 
       return message
         .channel
@@ -147,12 +152,14 @@ const invalidFormat = new Discord.MessageEmbed()
   }
 
 module.exports.help = {
-    name: "poll",
-    description: "Create a poll!",
+    name: `${config.poll.command_name}`,
+    description: `${config.poll.command_description}`,
     permissions: [],
     alias: [
-        "polls",
-        "pollcreator"
+        `${config.poll.command_aliases.alias_1}`,
+        `${config.poll.command_aliases.alias_2}`,
+        `${config.poll.command_aliases.alias_3}`,
+        `${config.poll.command_aliases.alias_4}`
     ],
-    usage: "poll <\"Title\">",
+    usage: `${config.poll.command_usage}`,
 }

@@ -2,6 +2,7 @@ const discord = require("discord.js");
 const config = require("../storage/config.json");
 const sanction = require("../util/sanction");
 const sanctionTypes = require("../structures/sanctionTypes");
+const db = require("../db")
 const ms = require("ms");
 
 /**
@@ -10,9 +11,10 @@ const ms = require("ms");
  * @param {discord.Message} msg 
  * @param {string[]} args 
  */
-module.exports.run = (Client, msg, args) => {
+module.exports.run = (Client, msg, args, guild) => {
+    msg.delete();
     const usertoban = msg.mentions.users.first(); // bad guy variable
-    const reason = args.slice(2).join(" ");
+    let reason = args.slice(2).join(" ");
 
     if (!args[1] || ms(args[1])) {
         return msg.channel.send({
@@ -24,7 +26,7 @@ module.exports.run = (Client, msg, args) => {
         });
     }
 
-    const logs = Client.channels.cache.get(config.logging.channel)
+    const logs = Client.channels.cache.get(config.logs.logs.moderation)
 
     //embeds
     const bansucceed = new discord.MessageEmbed()
@@ -51,20 +53,23 @@ module.exports.run = (Client, msg, args) => {
             member.ban({
                 reason: `${member} tempbanned ${usertoban} for ${reason}`,
             }).then(() => {
-                sanction(
-                    sanctionTypes.TEMPBAN,
-                    msg.author,
-                    usertoban,
-                    msg.guild,
-                    reason,
-                    new Date(new Date().getTime() + ms(args[1])),
-                );
+                db.models.Sanction.create({
+                    type: sanctionTypes.TEMPBAN,
+                    mod: msg.author.id,
+                    user: msg.mentions.users.first(),
+                    guild: msg.guild.id,
+                    reason: reason,
+                    revoked: false,
+                    expire: new Date(new Date().getTime() + ms(args[1])),
+                });
                 msg.channel.send(bansucceed);
                 const embed = new discord.MessageEmbed()
                     .setColor(config.embed.color)
                     .setAuthor(`Tempban issued by ${msg.author.username} (${msg.author.id}) to ${member} (${member.id})`, msg.author.avatarURL)
                     .setDescription(`Reason: ${reason}`);
                 logs.send(embed);
+                console.log(`Testing console`)
+                console.log(`${msg.mentions.users.first().id}`)
                 usertoban.send({
                     "embed": {
                         "color": config.embed.color,
@@ -99,5 +104,5 @@ module.exports.help = {
         "BAN_MEMBERS"
     ],
     alias: [],
-    usage: "tempban [@user] [duration] [reason]",
+    usage: "tempban <duration> <@user> <reason>",
 }

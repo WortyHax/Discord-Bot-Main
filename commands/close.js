@@ -11,6 +11,7 @@ const log = require("../util/log");
  * @param {string[]} args 
  */
 module.exports.run = async (Client, msg, args) => {
+    msg.delete();
     if (!isTicketChannel(msg.channel)) {
         return msg.channel.send(
             new discord.MessageEmbed({

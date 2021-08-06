@@ -11,6 +11,7 @@ const logger = require('../logger')
  * @param {string[]} args 
  */
 module.exports.run = (Client, msg, args) => {
+    msg.delete();
     if (!args[0]) {
         return messageUtils.sendSyntaxError(msg.channel, this);
     }
@@ -23,7 +24,7 @@ module.exports.run = (Client, msg, args) => {
 
     g.end().then(() => {
         const embed = new discord.MessageEmbed()
-        .setColor(config.colors.positive)
+        .setColor(config.embed.colors.mainColor)
         .setTimestamp()
         .setTitle("Ended the giveaway!");
         msg.channel.send(embed).then(m => m.delete({timeout: 5000}))

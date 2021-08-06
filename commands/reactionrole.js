@@ -10,6 +10,7 @@ const {rr} = require("../util/reactionRoleManager");
  * @param {string[]} args 
  */
 module.exports.run = (Client, msg, args) => {
+    msg.delete();
     if (!(args[0] || args[1] || args[2])) {
         return msg.channel.send(
             new discord.MessageEmbed()

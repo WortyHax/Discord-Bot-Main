@@ -10,6 +10,7 @@ const config = require("../storage/config.json");
  * @param {string[]} args 
  */
 module.exports.run = (Client, msg, args) => {
+    msg.delete();
     if (!msg.mentions.users.first()) {
         return msg.channel.send(
             new discord.MessageEmbed()

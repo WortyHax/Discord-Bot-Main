@@ -2,6 +2,8 @@ const messageUtils = require('../util/messageUtils');
 const db = require('../db');
 const discord = require('discord.js');
 const config = require('../storage/config.json')
+const lang = require('../storage/lang.json')
+const emoji = require('../storage/emojis.json')
 const logger = require('../logger.js')
 
 /**
@@ -11,6 +13,7 @@ const logger = require('../logger.js')
  * @param {string[]} args 
  */
 module.exports.run = async (Client, msg, args) => {
+    msg.delete();
     if (!args[0]) {
         return messageUtils.sendSyntaxError(msg.channel, this);
     }
@@ -22,38 +25,58 @@ module.exports.run = async (Client, msg, args) => {
     });
 
     let reason = args.slice(1).join(" ");
-    if (reason.length <= 0) reason = "No reason";
+    if (reason.length <= 0) reason = `${lang.suggestion.denied.error.no_reason}`;
 
     if (!suggestionObj) {
-        return messageUtils.sendError(msg.channel, this, "Suggestion not found!");
+        return messageUtils.sendError(msg.channel, this, `${lang.suggestion.denied.error.no_suggestion_found} ${args[0]}`);
     }
 
     const suggester = msg.guild.member(suggestionObj.author);
-    const suggestionChannel = msg.guild.channels.cache.get(config.channels.suggestions);
+    const suggestionChannel = msg.guild.channels.cache.get(config.channels.pendingSuggestions);
     const suggestionMsg = await suggestionChannel.messages.fetch(args[0]);
+    const topic = suggestionObj.topic
+    const id = suggestionObj.msg
     
     const suggestor = await msg.guild.members.fetch(suggestionObj.author);
     const embed = new discord.MessageEmbed()
-    .setColor(config.colors.negative)
-    .setFooter(config.embed.footer)
-    .setTitle("New suggestion denied!")
-    .setAuthor(`Suggestion from ${suggestor.user.username}`, suggester.user.avatarURL())
-    .setThumbnail(suggester.user.avatarURL())
-    .setDescription(`${suggestionObj.suggestion}\n\n**Information:**\nStatus: \`Denied\`\n\n*${reason}*`);
-    msg.guild.channels.cache.get(config.channels.deniedSuggestions).send(embed);
+    .setColor(config.embed.colors.negative)
+    .setFooter(`${lang.suggestion.denied.denied_footer_1} ${suggestor.user.username}${lang.suggestion.denied.denied_footer_2}`, suggester.user.avatarURL({ dynamic: true }))
+    .setTitle(`${lang.suggestion.denied.denied_title}`)
+    .setAuthor(`${lang.suggestion.denied.denied_author} ${suggestor.user.username}`, suggester.user.avatarURL({ dynamic: true }))
+    .setThumbnail(config.embed.thumbnail)
+    .setDescription(`${lang.suggestion.denied.denied_topic} \`${topic}\`\n${lang.suggestion.denied.denied_suggestion}\n\`${suggestionObj.suggestion}\`\n\n${lang.suggestion.denied.denied_information}\n${lang.suggestion.denied.denied_status_1} \`${lang.suggestion.denied.denied_status_2}\`\n\n${lang.suggestion.denied.denied_reason}\n${reason}`);
+    
+    msg.guild.channels.cache.get(config.channels.deniedSuggestions).send(embed).then(async m => {
+
+        const logs = new discord.MessageEmbed()
+        .setAuthor(`${lang.suggestion.denied.logs.logs_title}`)
+        .setColor(config.suggestion.colors.denied)
+        .setThumbnail(config.embed.thumbnail)
+        .setDescription(`${lang.suggestion.denied.logs.logs_description_1}
+        ${lang.suggestion.denied.logs.logs_description_2} <@${suggester.user.id}>
+        ${lang.suggestion.denied.logs.logs_description_3} \`${suggester.user.id}\`
+        ${lang.suggestion.denied.logs.logs_description_4} <@${msg.author.id}>
+        ${lang.suggestion.denied.logs.logs_description_5} \`${reason}\`
+        ${lang.suggestion.denied.logs.logs_description_6} \`${id}\`
+        ${lang.suggestion.denied.logs.logs_description_7} \`${topic}\`
+        ${lang.suggestion.denied.logs.logs_description_8}
+        \`${suggestionObj.suggestion}\``)
+
+        msg.guild.channels.cache.get(config.logs.suggestion.suggestion_denied).send(logs)
+    })
 
     await messageUtils.sendDM(msg.guild.member(suggestionObj.author).user, {
         embed: {
-            color: config.colors.negative,
-            footer: config.colors.negative,
-            title: "Your suggestion has been denied!",
-            description: "Thank you for your suggestion. After consideration, we have decided that we will not implement this. We try our best to keep the server brilliant, but your suggestion was denied.",
-            fields: [
-                {
-                    name: "Reason",
-                    value: reason
-                }
-            ],
+            color: config.suggestion.colors.denied,
+            "thumbnail": {
+                "url": config.embed.thumbnail
+            },
+            footer: {
+                "text": `${lang.suggestion.denied.dm.footer} ${msg.author.username}`,
+                "icon_url": `${msg.author.avatarURL({ dynamic: true })}`
+            },
+            title: `${lang.suggestion.denied.dm.title}`,
+            description: `${lang.suggestion.denied.dm.description_2}\n\n${lang.suggestion.denied.dm.description_1}\n${reason}`,
             timestamp: new Date()
         }
     });
@@ -64,24 +87,34 @@ module.exports.run = async (Client, msg, args) => {
 
     suggestionMsg.edit(
         new discord.MessageEmbed()
-        .setColor(config.colors.negative)
-        .setFooter(config.embed.footer)
-        .setDescription(suggestionObj.suggestion)
+        .setAuthor(`${lang.suggestion.pending.pending_author} ${suggestor.user.username}`, suggestor.user.avatarURL({ dynamic: true }))
+        .setColor(config.suggestion.colors.denied)
+        .addField(`${lang.suggestion.pending.pending_topic}`, `\`${topic}\``)
+        .addField(`${lang.suggestion.pending.pending_suggestion}`, `\`${suggestionObj.suggestion}\``)
+        .addField(`${lang.suggestion.denied.denied_status_1}`, `\`${lang.suggestion.denied.denied_status_2}\``)
+        .setThumbnail(config.embed.thumbnail)
+        .setFooter(`${lang.suggestion.pending.pending_footer} ${id}`)
         .setTimestamp()
-        .setAuthor(`Suggestion from ${suggestor.user.username}`, suggester.user.avatarURL())
     );
     suggestionMsg.reactions.removeAll();
 }
 
 module.exports.help = {
-    name: "denysuggestion",
-    description: "Deny a suggestion.",
+    name: `${config.suggestion.settings.denySuggestion.command_name}`,
+    description: `${config.suggestion.settings.denySuggestion.command_description}`,
     permissions: [
-        "MANAGE_GUILD"
+        `${config.suggestion.settings.denySuggestion.command_permissions.permission_1}`,
+        `${config.suggestion.settings.denySuggestion.command_permissions.permission_2}`,
+        `${config.suggestion.settings.denySuggestion.command_permissions.permission_3}`,
+        `${config.suggestion.settings.denySuggestion.command_permissions.permission_4}`,
+        `${config.suggestion.settings.denySuggestion.command_permissions.permission_5}`
     ],
     alias: [
-        "dsuggest",
-        "denySuggestion"
+        `${config.suggestion.settings.denySuggestion.command_aliases.alias_1}`,
+        `${config.suggestion.settings.denySuggestion.command_aliases.alias_2}`,
+        `${config.suggestion.settings.denySuggestion.command_aliases.alias_3}`,
+        `${config.suggestion.settings.denySuggestion.command_aliases.alias_4}`,
+        `${config.suggestion.settings.denySuggestion.command_aliases.alias_5}`
     ],
-    usage: "denySuggestion <suggestionId> [reason]",
+    usage: `${config.suggestion.settings.denySuggestion.command_usage}`,
 }

@@ -7,6 +7,7 @@ const discord = require("discord.js");
  * @param {string[]} args 
  */
 module.exports.run = (Client, msg, args) => {
+    msg.delete();
 
     // Quantum the makers helping thingy
 

@@ -10,6 +10,7 @@ const ticketConfig = require("../storage/ticket.json");
  * @param {string[]} args 
  */
 module.exports.run = (Client, msg, args) => {
+    msg.delete();
     const embed = new discord.MessageEmbed()
     .setColor(config.embed.color)
     .setFooter(config.embed.footer)
