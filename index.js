@@ -78,7 +78,7 @@ const sanctionRevoker = new cron(
                         }).catch(logger.error.bind(logger.error));
                     } else if (sanction.type == sanctionTypes.TEMPBAN) {
                         g.fetchBans().then(bans => {
-                            if (bans.find(sanction.user)) return; 
+                            if (bans.find(ban => ban.user.id == sanction.user)) return; 
                             g.members.unban(sanction.user).catch(logger.error.bind(logger.error));
                         })
                     }

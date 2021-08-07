@@ -53,15 +53,14 @@ module.exports.run = (Client, msg, args, guild) => {
             member.ban({
                 reason: `${member} tempbanned ${usertoban} for ${reason}`,
             }).then(() => {
-                db.models.Sanction.create({
-                    type: sanctionTypes.TEMPBAN,
-                    mod: msg.author.id,
-                    user: msg.mentions.users.first(),
-                    guild: msg.guild.id,
-                    reason: reason,
-                    revoked: false,
-                    expire: new Date(new Date().getTime() + ms(args[1])),
-                });
+                sanction(
+                    sanctionTypes.TEMPBAN,
+                    msg.author,
+                    usertoban,
+                    msg.guild,
+                    reason,
+                    new Date(new Date().getTime() + ms(args[1])),
+                );
                 msg.channel.send(bansucceed);
                 const embed = new discord.MessageEmbed()
                     .setColor(config.embed.color)
